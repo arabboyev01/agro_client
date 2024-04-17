@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  height: 100vh;
+  background-image: url(./assets/Group\ 397.svg);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.c-wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+.c-sidebar {
+  flex: 0.1;
+}
+.c-body {
+  flex: 0.9;
+}
+.c-header {
+  height: 63px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}
+.c-main {
+  padding: 24px 0;
+}
+.box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0 ;
+}

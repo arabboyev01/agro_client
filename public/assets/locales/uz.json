@@ -1,0 +1,18 @@
+{
+    "home": {
+        "title": "AGRO",
+        "seeds": "URUG'",
+        "text": "Bu qishloq xo'jaligi korxonalari uchun xarid qilish platformasi",
+        "sub": "Biz sizning qishloq xo'jaligi korxonangiz ehtiyojlari uchun tovarlarga katta chegirmalarni topish uchun qulay va bepul vositani yaratdik.",
+        "access": "So'rov yarating",
+        "magazin": "Urug'lik do'koni",
+        "magazin1": "Qishloq xo'jaligi xizmatlari va maslahatlari",
+        "magazin2": "Urug'lik navlari va urug'lari"
+    },
+    "call": "Qo'ngiroq qilish",
+    "message": "Xabar yo'llash",
+    "login": "Kirish",
+    "seeds": {
+        "search": "Qidirish"
+    }
+}

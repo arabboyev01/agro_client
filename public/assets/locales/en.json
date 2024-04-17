@@ -1,0 +1,18 @@
+{
+    "home": {
+        "title": "AGRO",
+        "seeds": "SEEDS",
+        "text": "This is a purchasing platform for agricultural enterprises",
+        "sub": "We have created a convenient and free tool for finding great deals on goods for the needs of your agricultural enterprise.",
+        "access": "Create a request",
+        "magazin": "Seed store",
+        "magazin1": "Agricultural services and consultations",
+        "magazin2": "Seed varieties and seeds"
+    },
+    "call": "Call us",
+    "message": "Message",
+    "login": "Login",
+    "seeds": {
+        "search": "Search here"
+    }
+}

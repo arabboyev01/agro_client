@@ -1,0 +1,1 @@
+export const LanData = [ "en", "ru", "uz"]
