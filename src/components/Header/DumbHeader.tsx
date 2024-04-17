@@ -14,7 +14,7 @@ const DumbHeader: FC<Props> = ({ lan, setLang, lang, handleRoute }) => (
       <S.LogoImage src={LogoSVG.src} alt='logo' onClick={() => handleRoute('/')}/>
       <S.Content>
         <MainDropdown title='ru' data={LanData} value={lan} setValue={setLang} />
-        <MainButton width={200} height={50} text={lang('login')}/>
+        <MainButton width={200} height={50} text={lang('login')} onClick={() => handleRoute('/admin/login')} />
       </S.Content>
     </S.HeaderContent>
   </S.StyleHeader>
