@@ -14,7 +14,7 @@ export const HomeData = (t: TFunction<"translation", undefined>) => {
             id: 1,
             name: t('home.magazin1'),
             Icon: I.HomeIcon2,
-            route: "/seeds",
+            route: "/consultant",
         },
         {
             id: 2,

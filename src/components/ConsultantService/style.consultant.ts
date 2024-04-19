@@ -3,9 +3,16 @@ import styled from "styled-components";
 export const StyleConsultant = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 76px;
   margin-top: 35px;
   flex-wrap: wrap;
+
+  @media(max-width: 650px){
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
 `;
 export const ConsultantContent = styled.div`
   max-width: 275px;
@@ -19,6 +26,7 @@ export const ConsultantContent = styled.div`
   align-items: center;
   justify-content: center;
   padding: 26px 30px;
+  margin-bottom: 20px;
 `;
 export const Image = styled.img`
   width: 136px;

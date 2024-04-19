@@ -6,15 +6,15 @@ import { FC } from 'react'
 import { MainButton } from '../Buttons/MainButton'
 import { TFunction } from 'i18next'
 
-interface Props { lan: string, setLang: (value: string) => void, lang: TFunction<"translation", undefined>, handleRoute: (route: string) => void }
+interface Props { lan: string, setLang: (value: string) => void, lang: TFunction<"translation", undefined>, handleRoute: (route: string) => void, isMobile: boolean }
 
-const DumbHeader: FC<Props> = ({ lan, setLang, lang, handleRoute }) => (
+const DumbHeader: FC<Props> = ({ lan, setLang, lang, handleRoute , isMobile}) => (
   <S.StyleHeader data-aos="fade-down">
     <S.HeaderContent>
       <S.LogoImage src={LogoSVG.src} alt='logo' onClick={() => handleRoute('/')}/>
       <S.Content>
         <MainDropdown title='ru' data={LanData} value={lan} setValue={setLang} />
-        <MainButton width={200} height={50} text={lang('login')} onClick={() => handleRoute('/admin/login')} />
+        <MainButton width={isMobile ? 100 : 200} height={isMobile ? 35 : 50} text={lang('login')} onClick={() => handleRoute('/admin/login')} />
       </S.Content>
     </S.HeaderContent>
   </S.StyleHeader>

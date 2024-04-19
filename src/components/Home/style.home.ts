@@ -29,11 +29,11 @@ export const LeftContent = styled.div`
   gap: 32px;
   @media (max-width: 1000px) {
     flex: 1;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: start;
-    overflow-x: scroll;
-    width: auto;
+    width: 100%;
+    order: 3;
+    gap: 6px;
   }
 `;
 export const LeftItems = styled.div`
@@ -47,6 +47,11 @@ export const LeftItems = styled.div`
   padding: 26px 0;
   box-shadow: 3px 0px 30px -7px rgba(0, 0, 0, 0.3);
   border-radius: 12px;
+
+  @media(max-width: 1000px){
+    width: 90%;
+    margin-bottom: 20px;
+  }
 `;
 export const LeftItemsText = styled.p`
   font-size: 15px;
@@ -54,6 +59,10 @@ export const LeftItemsText = styled.p`
   color: #828282;
   max-width: 138px;
   text-align: center;
+
+  @media(max-width: 1000px){
+    max-width: 80%;
+  }
 `;
 export const MiddleContent = styled.div`
   flex: .45;
@@ -64,6 +73,7 @@ export const MiddleContent = styled.div`
 
   @media (max-width: 1000px) {
     flex: 1;
+    order: 1;
   }
 `;
 export const MiddleTile = styled.div`
@@ -159,5 +169,6 @@ export const EndContent = styled.div`
 
   @media (max-width: 1000px) {
     flex: 1;
+    order: 2;
   }
 `

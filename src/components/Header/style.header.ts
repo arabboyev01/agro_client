@@ -14,7 +14,12 @@ export const LogoImage = styled.img`
   cursor: pointer;
   width: 113px;
   height: 113px;
-  obejct-fit: contain;
+  object-fit: contain;
+
+  @media(max-width: 500px){
+    width: 80px;
+  height: 80px;
+  }
 `
 export const Content = styled.div`
   display: flex;
