@@ -20,4 +20,8 @@ export const StyledButton = styled.button<Prop>`
   color: #fff;
   cursor: pointer;
   box-shadow: 0px 20px 50px -7px #6bb748;
+
+  &:active{
+    box-shadow: 0px 20px 50px -17px #6bb748;
+  }
 `;

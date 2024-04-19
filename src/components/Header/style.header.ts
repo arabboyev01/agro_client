@@ -12,6 +12,9 @@ export const HeaderContent = styled.div`
 `
 export const LogoImage = styled.img`
   cursor: pointer;
+  width: 113px;
+  height: 113px;
+  obejct-fit: contain;
 `
 export const Content = styled.div`
   display: flex;

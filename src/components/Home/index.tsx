@@ -8,6 +8,10 @@ const HomeComponent = () => {
 
     const handleRoute = (route: string) => router.push(route)
 
-    return <DumbHomePage lang={lang} handleRoute={handleRoute}/>
+    const callButton = () => {
+        window.location.href = 'tel:+998331108585'
+    }
+
+    return <DumbHomePage lang={lang} handleRoute={handleRoute} callButton={callButton}/>
 }
 export default HomeComponent

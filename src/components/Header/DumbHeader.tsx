@@ -1,5 +1,5 @@
 import * as S from './style.header'
-import LogoSVG from "../../assets/AGROSEEDS копия 1.svg"
+import LogoSVG from "../../assets/space_agro.png"
 import MainDropdown from '../Dropdown/MainDropdown'
 import { LanData } from './data'
 import { FC } from 'react'
