@@ -90,6 +90,7 @@ export const GreenTitle = styled.h1`
   font-size: 93px;
   font-weight: 900;
   line-height: 100px;
+  font-family: sans-serif;
 
   @media (max-width: 1500px) {
     font-size: 73px;
@@ -108,6 +109,7 @@ export const BlackTitle = styled.h1`
   font-size: 93px;
   font-weight: 900;
   line-height: 100px;
+  font-family: sans-serif;
 
   @media (max-width: 1500px) {
     font-size: 73px;
@@ -145,6 +147,7 @@ export const MiddleContact = styled.div`
 
   @media (max-width: 1000px) {
     margin-top: 20px;
+    gap: 10px;
   }
 `
 export const ContactInfo = styled.div`

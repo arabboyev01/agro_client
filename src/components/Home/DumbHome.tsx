@@ -21,8 +21,8 @@ const DumbHomePage: FC<Props> = ({ lang, handleRoute, callButton }) => (
         </S.LeftContent>
         <S.MiddleContent>
             <S.MiddleTile>
-                <S.GreenTitle data-aos="fade-right">{lang('home.title')}</S.GreenTitle>
-                <S.BlackTitle data-aos="fade-left">{lang('home.seeds')}</S.BlackTitle>
+                <S.GreenTitle data-aos="fade-right">Space</S.GreenTitle>
+                <S.BlackTitle data-aos="fade-left">Agro</S.BlackTitle>
             </S.MiddleTile>
             <S.Subtitle>{lang('home.text')}</S.Subtitle>
             <S.Paragraph>{lang('home.sub')}</S.Paragraph>

@@ -3,6 +3,9 @@ import styled from "styled-components"
 export const StyleHeader = styled.div`
   width: 100%;
   height: auto;
+  @media(max-width: 500px){
+   margin-top: 20px;
+  }
 `
 export const HeaderContent = styled.div`
   display: flex;
@@ -18,7 +21,7 @@ export const LogoImage = styled.img`
 
   @media(max-width: 500px){
     width: 80px;
-  height: 80px;
+    height: 80px;
   }
 `
 export const Content = styled.div`

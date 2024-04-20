@@ -86,7 +86,7 @@ const ConsultantAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="What is dagree "
+                                label="Enter message number"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.dagree}
@@ -126,7 +126,7 @@ const ConsultantAdd = () => {
                             </div>
                         </Box>
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <CButton color="primary">
+                            <CButton color="primary" type="submit">
                                 Create new Consultant
                                 {loader && <CSpinner color="light" style={{ width: '15px', height: "15px" }} />}
                             </CButton>
