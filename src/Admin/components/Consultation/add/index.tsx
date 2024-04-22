@@ -31,7 +31,7 @@ const ConsultantAdd = () => {
                 toast.success("Consultant Created", {
                     theme: "dark"
                 })
-                navigate("/admin/consultant")
+                navigate("/admin/consulation")
                 setLoader(false)
             }
             else {
