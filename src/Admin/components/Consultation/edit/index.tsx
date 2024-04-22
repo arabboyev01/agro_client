@@ -16,9 +16,9 @@ const ProductEdit = () => {
     const [image, setImage] = useState<string | any>("")
     const [initialValues, setInitialValues] = useState(
         {
-            name: "",
-            price: "",
-            plantTypeId: "",
+            fullName: "",
+            dagree: "",
+            phone_number: "",
         }
     );
 
