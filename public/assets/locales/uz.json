@@ -7,12 +7,15 @@
         "access": "So'rov yarating",
         "magazin": "Urug'lik do'koni",
         "magazin1": "Qishloq xo'jaligi xizmatlari va maslahatlari",
-        "magazin2": "Urug'lik navlari va urug'lari"
+        "magazin2": "Urug'lik navlari va urug'lari",
+        "search": "Qidirsih"
     },
     "call": "Qo'ngiroq qilish",
     "message": "Xabar yo'llash",
     "login": "Kirish",
     "seeds": {
         "search": "Qidirish"
-    }
+    },
+    "select_type": "Turni tanlang",
+    "select_plant": "Kategoriya tanlang"
 }

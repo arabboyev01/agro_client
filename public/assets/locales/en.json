@@ -7,12 +7,15 @@
         "access": "Create a request",
         "magazin": "Seed store",
         "magazin1": "Agricultural services and consultations",
-        "magazin2": "Seed varieties and seeds"
+        "magazin2": "Seed varieties and seeds",
+        "search": "Search"
     },
     "call": "Call us",
     "message": "Message",
     "login": "Login",
     "seeds": {
         "search": "Search here"
-    }
+    },
+    "select_type": "Select type",
+    "select_plant": "Select catgeory"
 }

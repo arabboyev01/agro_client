@@ -8,7 +8,7 @@ interface Prop {
 }
 
 export const StyledButton = styled.button<Prop>`
-  width: ${({ width }) => `${width}px`};
+  width: ${({ width }) => `${width}px !important`};
   height: ${({ height }) => `${height}px`};
   border: none;
   border-radius: 24px;
