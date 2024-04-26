@@ -54,7 +54,7 @@ const DumbVarities: FC<Props> = ({ lang, handleRoute, categories, types, setType
                     <SS.VarityImage src={image} alt={`image_${id}`}/>
                     <div>
                         <SS.VarityName>{name}</SS.VarityName>
-                        <SS.VarityText>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</SS.VarityText>
+                        <SS.VarityText>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley</SS.VarityText>
 
                     </div>
                   </SS.VarityType>
