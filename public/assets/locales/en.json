@@ -18,5 +18,15 @@
     },
     "select_type": "Select type",
     "select_plant": "Select catgeory",
-    "varity_title": "type of seeds and their varieties"
+    "varity_title": "type of seeds and their varieties",
+    "order": {
+        "send": "Send",
+        "title": "Contact Information",
+        "name": "Full Name",
+        "phone": "Phone number",
+        "cancel": "Cancel",
+        "desc": "You can order product that you like to eat, after you submit your order, our a team member will contact you !",
+        "full_name": "Enter your full name",
+        "phone_number": "Enter your phone number"
+    }
 }

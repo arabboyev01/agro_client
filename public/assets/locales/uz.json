@@ -18,5 +18,15 @@
     },
     "select_type": "Turni tanlang",
     "select_plant": "Kategoriya tanlang",
-    "varity_title": "urug'lar turi va ularning navlari"
+    "varity_title": "urug'lar turi va ularning navlari",
+    "order": {
+        "send": "Jo'natish",
+        "title": "Aloqa ma'lumotlarini",
+        "name": "Ism familiyangiz",
+        "phone": "Telefon raqamingiz",
+        "cancel": "Qaytish",
+        "desc": "Siz iste'mol qilishni yoqtiradigan mahsulotga buyurtma berishingiz mumkin, buyurtmani topshirganingizdan so'ng, bizning guruh a'zomiz siz bilan bog'lanadi!",
+        "full_name": "To'liq ismingizni kiriting",
+        "phone_number": "Telefon raqamingizni kiriting"
+    }
 }
