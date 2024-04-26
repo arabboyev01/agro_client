@@ -15,9 +15,18 @@ interface Props {
     setCategory: (category: string) => void
     type: any
     category: any
+    handleData: () => void
+    data: data[] | null
 }
 
-const DumbVarities: FC<Props> = ({ lang, handleRoute, categories, types, setType, setCategory, category, type }) => (
+type data = {
+    id: number
+    categoryId: number
+    image: string
+    name: string
+}
+
+const DumbVarities: FC<Props> = ({ lang, handleRoute, categories, types, setType, setCategory, category, type, handleData, data }) => (
     <S.StyleHomePage>
         <S.LeftContent>
             {HomeData(lang).map(({ id, name, Icon, route }) =>
@@ -33,9 +42,24 @@ const DumbVarities: FC<Props> = ({ lang, handleRoute, categories, types, setType
                 <VarityDropdown data={categories} setValue={setCategory} value={category?.name} text={lang('select_type')}/>
                 <VarityDropdown data={types} setValue={setType} value={type?.name} text={lang('select_plant')}/>
                 <div>
-                    <MainButton width={200} height={50} text={lang('home.search')} />
+                    <MainButton onClick={handleData} width={200} height={50} text={lang('home.search')} />
                 </div>
             </SS.VaritySelectors>
+            <SS.VarietyContent>
+                <SS.MainText>{lang('varity_title')}</SS.MainText>
+            </SS.VarietyContent>
+            <SS.VaritiesWrapper>
+                {data && data.map(({ id, name, image }) => 
+                  <SS.VarityType key={id}>
+                    <SS.VarityImage src={image} alt={`image_${id}`}/>
+                    <div>
+                        <SS.VarityName>{name}</SS.VarityName>
+                        <SS.VarityText>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</SS.VarityText>
+
+                    </div>
+                  </SS.VarityType>
+                )}
+            </SS.VaritiesWrapper>
         </SS.VarityComponent>
     </S.StyleHomePage>
 )

@@ -17,5 +17,6 @@
         "search": "Search here"
     },
     "select_type": "Select type",
-    "select_plant": "Select catgeory"
+    "select_plant": "Select catgeory",
+    "varity_title": "type of seeds and their varieties"
 }
