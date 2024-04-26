@@ -81,7 +81,8 @@ export const Items = styled.p`
   }
 `;
 export const VarietyContent = styled.div`
-  margin-top: 76px;
+  max-width: 1000px;
+  margin: 75px auto 0 auto;
 
   @media only screen and (max-width: 768px) {
     margin-top: 40px;
@@ -103,7 +104,7 @@ export const MainText = styled.h1`
 `;
 export const VaritiesWrapper = styled.div`
   max-width: 1000px;
-  margin: 50px auto;
+  margin: 10px auto;
   display: flex;
   flex-direction: row;
   align-items: center;
