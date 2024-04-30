@@ -5,6 +5,7 @@ import { HomeData, carouselData } from "./statics"
 import { PhoneSVG, EmailSVG } from "@/assets/images"
 import { TFunction } from "i18next"
 import * as S from "./style.home"
+import { clickTelegram } from "../Buttons/Telegram"
 
 interface Props { lang: TFunction<"translation", undefined>, handleRoute: (route: string) => void, callButton: () => void }
 
@@ -34,7 +35,7 @@ const DumbHomePage: FC<Props> = ({ lang, handleRoute, callButton }) => (
                 </S.ContactInfo>
                 <S.ContactInfo>
                     <EmailSVG />
-                    <S.ContactText onClick={() => window.open('https://telegram.org/spaceagrouz', '_blank')}>
+                    <S.ContactText onClick={() => clickTelegram('spaceagro')}>
                         {lang('message')}
                     </S.ContactText>
                 </S.ContactInfo>
