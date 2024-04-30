@@ -25,7 +25,6 @@ const DumbHomePage: FC<Props> = ({ lang, handleRoute, callButton }) => (
                 <S.BlackTitle data-aos="fade-left">Agro</S.BlackTitle>
             </S.MiddleTile>
             <S.Subtitle>{lang('home.text')}</S.Subtitle>
-            <S.Paragraph>{lang('home.sub')}</S.Paragraph>
             <MainButton width={185} height={45} text={lang('call')} textSize={12} onClick={callButton}/>
 
             <S.MiddleContact>
@@ -35,7 +34,9 @@ const DumbHomePage: FC<Props> = ({ lang, handleRoute, callButton }) => (
                 </S.ContactInfo>
                 <S.ContactInfo>
                     <EmailSVG />
-                    <S.ContactText>{lang('message')}</S.ContactText>
+                    <S.ContactText onClick={() => window.open('https://telegram.org/spaceagrouz', '_blank')}>
+                        {lang('message')}
+                    </S.ContactText>
                 </S.ContactInfo>
             </S.MiddleContact>
         </S.MiddleContent>

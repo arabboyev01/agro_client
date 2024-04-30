@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 import DumbHeader from "./DumbHeader"
 import i18next from 'i18next'
 import { Language } from "@/hooks/language"
@@ -8,14 +8,14 @@ import useMediaQuery from "@/hooks/mediaQuery"
 const HeaderComponent = () => {
 
     const router = useRouter()
-    const [lan, setLang] = useState('en')
+    const [lan, setLang] = useState('uz')
     const { lang } = Language()
 
     const handleRoute = (route: string) => router.push(route)
 
     const isMobile = useMediaQuery('(max-width: 768px)')
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setLang(i18next?.language || 'en')
     }, [])
 

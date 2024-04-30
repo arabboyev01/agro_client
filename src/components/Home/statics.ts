@@ -5,6 +5,12 @@ import { TFunction } from "i18next"
 export const HomeData = (t: TFunction<"translation", undefined>) => {
     return [
         {
+            id: 2,
+            name: t('home.magazin2'),
+            Icon: I.HomeIcon3,
+            route: "/varities",
+        },
+        {
             id: 0,
             name: t('home.magazin'),
             Icon: I.HomeIcon1,
@@ -16,12 +22,7 @@ export const HomeData = (t: TFunction<"translation", undefined>) => {
             Icon: I.HomeIcon2,
             route: "/consultant",
         },
-        {
-            id: 2,
-            name: t('home.magazin2'),
-            Icon: I.HomeIcon3,
-            route: "/varities",
-        },
+        
     ]
 }
 

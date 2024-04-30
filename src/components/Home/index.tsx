@@ -9,7 +9,7 @@ const HomeComponent = () => {
     const handleRoute = (route: string) => router.push(route)
 
     const callButton = () => {
-        window.location.href = 'tel:+998331108585'
+        window.location.href = 'tel:+998951203322'
     }
 
     return <DumbHomePage lang={lang} handleRoute={handleRoute} callButton={callButton}/>

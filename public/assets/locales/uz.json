@@ -2,12 +2,12 @@
     "home": {
         "title": "AGRO",
         "seeds": "URUG'",
-        "text": "Bu qishloq xo'jaligi korxonalari uchun xarid qilish platformasi",
+        "text": "Agro olam revolutsiyasi sari !",
         "sub": "Biz sizning qishloq xo'jaligi korxonangiz ehtiyojlari uchun tovarlarga katta chegirmalarni topish uchun qulay va bepul vositani yaratdik.",
         "access": "So'rov yarating",
-        "magazin": "Urug'lik do'koni",
-        "magazin1": "Qishloq xo'jaligi xizmatlari va maslahatlari",
-        "magazin2": "Urug'lik navlari va urug'lari",
+        "magazin": "Nav va duragaylar sotib olish",
+        "magazin1": "Qishloq xo'jaligi matahassislari bilan bog'lanish",
+        "magazin2": "Nav va duragaylar haqida",
         "search": "Qidirsih"
     },
     "call": "Qo'ngiroq qilish",
@@ -18,7 +18,7 @@
     },
     "select_type": "Turni tanlang",
     "select_plant": "Kategoriya tanlang",
-    "varity_title": "urug'lar turi va ularning navlari",
+    "varity_title": "Navining xarakteristikasi",
     "order": {
         "send": "Jo'natish",
         "title": "Aloqa ma'lumotlarini",
