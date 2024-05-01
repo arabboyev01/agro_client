@@ -30,7 +30,7 @@ const PlantTypeEdit = () => {
                 setInitialValues({
                     name_uz: data.data.name_uz,
                     name_ru: data.data.name_ru,
-                    name_uz: data.data.name_en
+                    name_en: data.data.name_en
                 })
             })
                 .catch(err => console.log(err))
