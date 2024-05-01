@@ -9,7 +9,7 @@ interface props { lang: TFunction<"language", undefined>, data: ConsultationType
 const DumbConsultant: FC<props> = ({ lang, data, callButton }) => (
         <S.StyleConsultant>
             {data?.map((item: ConsultationType) =>
-                <Consultants lang={lang} key={item.id} {...item} callButton={callButton}/>
+                <Consultants lang={lang} key={item.id} {...item} callButton={callButton} telegram_user={item.telegram_user}/>
             )}
         </S.StyleConsultant>
 )

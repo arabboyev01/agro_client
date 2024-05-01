@@ -10,6 +10,6 @@ const ConsultantService = () => {
 
     const callButton = (number: string) => window.location.href = `tel:${number}`
     
-    return <DumbConsultant lang={lang} data={data?.data} callButton={callButton}/>
+    return <DumbConsultant lang={lang} data={data?.data} callButton={callButton} />
 }
 export default ConsultantService

@@ -12,19 +12,20 @@ interface Props {
     setOpen: (value: boolean) => void,
     data: ProductType[]
     handleSearch: (e: ChangeEvent<HTMLInputElement>) => void
-    search: string
     lang: TFunction<"translation", undefined> 
+    l: any
 }
 
-const DumbSeeds: FC<Props> = ({ hover, setIsHovered, open, setOpen, data, handleSearch, search, lang }) => (
+const DumbSeeds: FC<Props> = ({ hover, setIsHovered, open, setOpen, data, handleSearch, lang, l }) => (
     <S.StyleSeeds>
         <S.SeachInput>
             <S.Input placeholder={lang('seeds.search')} onChange={handleSearch} />
             <SearchIcon />
         </S.SeachInput>
         <S.SeedsContent>
-            {data?.map((items) =>
-                <Fragment key={items.name} data-aos="fade-down">
+            {data?.map((items) => {
+                const name: string = items[`name_${l}` as keyof ProductType] as string;
+                return <Fragment key={items.name} data-aos="fade-down">
                     <S.SingleSeed
                         onMouseEnter={() => setIsHovered(items.id)}
                         onMouseLeave={() => setIsHovered(null)}
@@ -32,7 +33,7 @@ const DumbSeeds: FC<Props> = ({ hover, setIsHovered, open, setOpen, data, handle
                         <S.SeedImage src={items.image} />
                         <S.SeedContent>
                             <S.TextContent>
-                                <S.Name>{items.name}</S.Name>
+                            <S.Name>{name}</S.Name>
                                 <S.Price>${items.price}</S.Price>
                             </S.TextContent>
                             <S.IconsWrapper onClick={() => setOpen(true)}>
@@ -42,6 +43,7 @@ const DumbSeeds: FC<Props> = ({ hover, setIsHovered, open, setOpen, data, handle
                         <ModalComponent open={open} setOpen={setOpen} data={items} />
                     </S.SingleSeed>
                 </Fragment>
+            }
             )}
         </S.SeedsContent>
     </S.StyleSeeds>

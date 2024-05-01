@@ -1,20 +1,69 @@
-import { Box, TextField } from "@mui/material"
+import { Box, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material"
 import { Formik } from "formik"
 import * as yup from "yup"
 import useMediaQuery from "@mui/material/useMediaQuery"
-import { CButton } from "@coreui/react"
-import { ChangeEvent, useState } from "react"
-import { ImageLabel } from "../../Products/style.products"
+import { CButton, CSpinner } from "@coreui/react"
+import {  useState, useCallback, useEffect } from "react"
+import { Language } from '@/hooks/language'
+import { api } from '@/api'
+import { toast } from 'react-toastify'
+import { MAIN_URL } from "@/config"
+import Router from "@/hooks/router"
 
+type ProductType = {
+    id: number
+    name_uz: string
+    name_ru: string
+    name_en: string
+}
 const OrderAdd = () => {
-    const isNonMobile = useMediaQuery("(min-width:600px)")
-    const [image, setImage] = useState<string| { name: string }>("")
 
-    const handleFormSubmit = (values: any) => {
-        console.log(values);
-    }
-    const handleImage = (e: ChangeEvent<any>) => {
-        setImage(e?.target?.files[0])
+    const isNonMobile = useMediaQuery("(min-width:600px)")
+    const [product, setProduct] = useState<any>(null)
+    const [loader, setLoader] = useState(false)
+    const [data, setData] = useState([])
+
+    const fetchData = useCallback(() => {
+        fetch(`${MAIN_URL}/products`).then(res => res.json())
+        .then((data) => setData(data.data))
+    }, [])
+
+    useEffect(() => {
+        fetchData()
+    }, [fetchData])
+
+    const { l } = Language()
+    const { navigate } = Router()
+
+    const handleFormSubmit = (values: {customerName: string, phone: string }) => {
+        setLoader(true)
+        const payload = {
+            customerName: values.customerName,
+            phone: values.phone,
+            productId: product
+        }
+
+        if (values.customerName && values.phone && product) {
+            api.postData('orders', payload).then((data) => {
+                if (data.success) {
+                    toast.success("Your order has sent!", {
+                        theme: "dark"
+                    })
+                    setLoader(false)
+                    navigate("/admin/orders")
+                } else {
+                    toast.error(data.message, {
+                        theme: "dark"
+                    })
+                    setLoader(false)
+                }
+            }).catch((err: any) => {
+                toast.error(err.message, {
+                    theme: "dark"
+                })
+                setLoader(false)
+            })
+        }
     }
 
     return (
@@ -45,129 +94,67 @@ const OrderAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Product name"
+                                label="Customer name"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.name}
-                                name="name"
-                                error={!!touched.name && !!errors.name}
-                                helperText={touched.name && errors.name}
+                                value={values.customerName}
+                                name="customerName"
+                                error={!!touched.customerName && !!errors.customerName}
+                                helperText={touched.customerName && errors.customerName}
                                 sx={{ gridColumn: "span 2" }}
                             />
                             <TextField
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="What is period of water"
+                                label="Customer phone number"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.waterPeriod}
-                                name="waterPeriod"
-                                error={!!touched.waterPeriod && !!errors.waterPeriod}
-                                helperText={touched.waterPeriod && errors.waterPeriod}
+                                value={values.phone}
+                                name="phone"
+                                error={!!touched.phone && !!errors.phone}
+                                helperText={touched.phone && errors.phone}
                                 sx={{ gridColumn: "span 2" }}
                             />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Enter yield duration"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.yieldDuration}
-                                name="yieldDuration"
-                                error={!!touched.yieldDuration && !!errors.yieldDuration}
-                                helperText={touched.yieldDuration && errors.yieldDuration}
+                           <FormControl fullWidth
                                 sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Enter temperature"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.temperature}
-                                name="temperature"
-                                error={!!touched.temperature && !!errors.temperature}
-                                helperText={touched.temperature && errors.temperature}
-                                sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Light Requirements"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.lightRequirement}
-                                name="lightRequirement"
-                                error={!!touched.lightRequirement && !!errors.lightRequirement}
-                                helperText={touched.lightRequirement && errors.lightRequirement}
-                                sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Cultivation method"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.cultivationMethod}
-                                name="cultivationMethod"
-                                error={!!touched.cultivationMethod && !!errors.cultivationMethod}
-                                helperText={touched.cultivationMethod && errors.cultivationMethod}
-                                sx={{ gridColumn: "span 2" }}
-                            />
-                            <ImageLabel htmlFor="image">
-                                Choose an image
-                                <TextField
-                                    fullWidth
-                                    variant="filled"
-                                    type="file"
-                                    id="image"
-                                    onBlur={handleBlur}
-                                    value={values.cultivationMethod}
-                                    name="image"
-                                    sx={{ display: 'none' }}
-                                    onChange={handleImage}
-                                />
-                            </ImageLabel>
-                            <div>
-                            <p>{typeof image === "object" && image.name}</p>
-                            </div>
+                            >
+                                <InputLabel id="demo-simple-select-label">Choose a products</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={product?.id}
+                                    label="Plant Categories"
+                                    onChange={(e) => setProduct(e.target.value)}
+                                    name="categoryId"
+                                >
+                                    {data.map((item: ProductType) =>{
+                                        const name: string = item[`name_${l}` as keyof ProductType] as string 
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
+                                </Select>
+                            </FormControl>
                         </Box>
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <CButton color="primary">Create new Product</CButton>
+                            <CButton color="primary" type="submit" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                Create new Order
+                                {loader && <CSpinner color="light" style={{ width: '15px', height: "15px" }} />}
+                            </CButton>
                         </Box>
                     </form>
                 )}
             </Formik>
         </Box>
-    );
-};
-
-const phoneRegExp =
-    /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
+    )
+}
 
 const checkoutSchema = yup.object().shape({
-    name: yup.string().required("required"),
-    waterPeriod: yup.string().required("required"),
-    yieldDuration: yup.string().required("required"),
-    temperature: yup
-        .string()
-        // .matches(phoneRegExp, "Phone number is not valid")
-        .required("required"),
-    lightRequirement: yup.string().required("required"),
-    cultivationMethod: yup.string().required("required"),
+    customerName: yup.string().required("required"),
+    phone: yup.string().required("required"),
 });
 const initialValues = {
-    name: "",
-    waterPeriod: "",
-    yieldDuration: "",
-    temperature: "",
-    lightRequirement: "",
-    cultivationMethod: "",
-};
+    customerName: "",
+    phone: "+998"
+}
 
 export default OrderAdd;

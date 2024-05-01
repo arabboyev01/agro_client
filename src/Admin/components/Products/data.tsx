@@ -6,29 +6,32 @@ export const plantsTypeColumns = [
     label: '',
     filter: false,
     sorter: false,
+    _style: { width: '5%' },
+  },
+  {
+    key: 'name_uz',
     _style: { width: '20%' },
   },
   {
-    key: 'name',
+    key: 'name_ru',
+    _style: { width: '20%' },
+  },
+  {
+    key: 'name_en',
     _style: { width: '20%' },
   },
   {
     key: 'avatar',
-    _style: { width: '20%' }
-  },
-  {
-    key: 'plantTypeId',
-    _style: { width: '20%' },
-    label: "Plant Type"
+    _style: { width: '10%' }
   },
   {
     key: 'price',
-    _style: { width: '20%' }
+    _style: { width: '10%' }
   },
   {
     key: 'show_details',
     label: '',
-    _style: { width: '1%' },
+    _style: { width: '15%' },
     filter: false,
     sorter: false,
   },
@@ -36,12 +39,13 @@ export const plantsTypeColumns = [
 
 export const dataSet = (data: ProductsType[]) => {
   if (data?.length) {
-    return data.map(({ name, image, id, plantTypeId, price }) => {
+    return data.map(({ name_uz, name_ru, name_en, image, id, price }) => {
       return {
         id,
-        name,
+        name_uz,
+        name_ru,
+        name_en,
         avatar: image,
-        plantTypeId,
         price
       }
     })

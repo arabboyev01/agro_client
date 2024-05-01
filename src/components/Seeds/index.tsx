@@ -1,7 +1,5 @@
 import { useState, ChangeEvent, useCallback, useEffect } from "react"
 import DumbSeeds from "./DumbSeeds"
-import { useQuery } from "react-query"
-import { getMethod } from "@/api/custom"
 import { Loader } from "../Loader"
 import { Language } from "@/hooks/language"
 import { MAIN_URL } from "@/config"
@@ -23,7 +21,7 @@ const SeedsComponent = () => {
     }, [fetchData])
 
 
-    const { lang } = Language()
+    const { lang, l } = Language()
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setTimeout(() => {
@@ -33,6 +31,6 @@ const SeedsComponent = () => {
 
     if(!data) return <Loader />
 
-    return <DumbSeeds hover={hover} setIsHovered={setHovered} open={open} setOpen={setOpen} data={data} handleSearch={handleSearch} search={search} lang={lang}/>
+    return <DumbSeeds hover={hover} setIsHovered={setHovered} open={open} setOpen={setOpen} data={data} handleSearch={handleSearch} lang={lang} l={l}/>
 }
 export default SeedsComponent

@@ -11,7 +11,7 @@ const VaritiesComponent = () => {
     const { data: types}  = useQuery('plants-type', () => getData('plants-category'))
 
     const router = useRouter()
-    const { lang } = Language()
+    const { lang, l } = Language()
 
     const [type, setType] = useState<any>('')
     const [category, setCategory] = useState('')
@@ -22,7 +22,6 @@ const VaritiesComponent = () => {
     const handleData = () => {
         if(category && type) setData(type?.plantTypes)
     }
-    console.log(data)
 
     return <DumbVarities 
         lang={lang} 
@@ -35,6 +34,7 @@ const VaritiesComponent = () => {
         category={category} 
         handleData={handleData}
         data={data}
+        l={l}
     />
 }
 export default VaritiesComponent

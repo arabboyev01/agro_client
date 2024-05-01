@@ -6,6 +6,14 @@ import { api } from "@/api"
 import { toast } from "react-toastify"
 import Router from "@/hooks/router"
 import { Form, Field } from "react-final-form"
+import { Language } from "@/hooks/language"
+
+type PlantType = { 
+    id: number 
+    name_uz: string 
+    name_ru: string 
+    name_en: string 
+}
 
 const ProductEdit = () => {
 
@@ -14,10 +22,14 @@ const ProductEdit = () => {
     const [typeId, setTypeId] = useState('')
     const [loader, setLoader] = useState(false)
 
+    const { l } = Language()
+
     const [image, setImage] = useState<string | any>("")
     const [initialValues, setInitialValues] = useState(
         {
-            name: "",
+            name_uz: "",
+            name_ru: "",
+            name_en: "",
             price: "",
             plantTypeId: "",
         }
@@ -40,7 +52,9 @@ const ProductEdit = () => {
             api.getData(`products/${paramId}`).then((data) => {
                 setInitialValues(
                     {
-                        name: data.data.name,
+                        name_uz: data.data.name_uz,
+                        name_ru: data.data.name_ru,
+                        name_en: data.data.name_en,
                         price: data.data.price,
                         plantTypeId: data.data.plantTypeId,
                     }
@@ -59,7 +73,9 @@ const ProductEdit = () => {
         setLoader(true)
         const formData = new FormData()
 
-        formData.append("name", values.name)
+        formData.append("name_uz", values.name_uz)
+        formData.append("name_ru", values.name_ru)
+        formData.append("name_en", values.name_en)
         formData.append("price", values.price)
         formData.append("plantTypeId", typeId)
         formData.append("image", image)
@@ -94,13 +110,41 @@ const ProductEdit = () => {
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                         <div className="box">
-                            <Field name="name">
+                            <Field name="name_uz">
                                 {({ input, meta }) => (
                                     <TextField
                                         fullWidth
                                         variant="filled"
                                         type="text"
-                                        label="Product name"
+                                        label="Product name uz"
+                                        {...input}
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                    />
+                                )}
+                            </Field>
+                            <Field name="name_ru">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        fullWidth
+                                        variant="filled"
+                                        type="text"
+                                        label="Product name ru"
+                                        {...input}
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                    />
+                                )}
+                            </Field>
+                        </div>
+                        <div className="box">
+                            <Field name="name_en">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        fullWidth
+                                        variant="filled"
+                                        type="text"
+                                        label="Product name en"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}
@@ -113,7 +157,7 @@ const ProductEdit = () => {
                                         fullWidth
                                         variant="filled"
                                         type="text"
-                                        label="What is period of water"
+                                        label="Price"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}
@@ -134,9 +178,10 @@ const ProductEdit = () => {
                                     label="Plant Types"
                                     onChange={handleType}
                                 >
-                                    {types.map(({ id, name }) =>
-                                        <MenuItem value={id} key={id}>{name}</MenuItem>
-                                    )}
+                                    {types.map((item: PlantType) => {
+                                        const name: string = item[`name_${l}` as keyof PlantType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
                                 </Select>
                             </FormControl>
                         </div>

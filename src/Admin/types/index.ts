@@ -43,7 +43,9 @@ export interface PlantTypeProp<T> {
 
 export interface ProductsType {
     id: number
-    name: string
+    name_uz: string
+    name_ru: string
+    name_en: string
     plantTypeId: number
     plantType: OrderType[]
     price: number
@@ -52,12 +54,8 @@ export interface ProductsType {
 
   export interface OrderType {
     id: number
-    plantName: string
-    plantVariety: string
-    price: number
-    image: string
     customerName: string
-    phone: string
+    customerPhone: string
     productId: number
     product: ProductsType
   }

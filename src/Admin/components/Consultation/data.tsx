@@ -38,6 +38,8 @@ export const consultationColumn = [
     dagree: string
     phone_number: string
     id: number
+    telegram_user: string
+    youtube_url?: string
   }
 
   export const dataSet = (data: ConsultationType[]) => {

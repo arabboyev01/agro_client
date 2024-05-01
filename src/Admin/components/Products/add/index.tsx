@@ -8,6 +8,14 @@ import { ChangeEvent, useState, useCallback, useEffect } from "react"
 import { api } from "@/api"
 import Router from "@/hooks/router"
 import { toast } from "react-toastify"
+import { Language } from "@/hooks/language"
+
+type PlantType = { 
+    id: number 
+    name_uz: string 
+    name_ru: string 
+    name_en: string 
+}
 
 const ProductsAdd = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)")
@@ -17,11 +25,14 @@ const ProductsAdd = () => {
     const [loader, setLoader] = useState(false)
 
     const { navigate } = Router()
+    const { l } = Language()
 
     const handleFormSubmit = (values: any) => {
         setLoader(true)
         const formData = new FormData()
-        formData.append("name", values.name)
+        formData.append("name_uz", values.name_uz)
+        formData.append("name_ru", values.name_ru)
+        formData.append("name_en", values.name_uz)
         formData.append("price", values.price)
         formData.append("plantTypeId", typeId)
         formData.append("image", image)
@@ -47,9 +58,8 @@ const ProductsAdd = () => {
         })
     }
 
-    const handleImage = (e: ChangeEvent<any>) => {
-        setImage(e?.target?.files[0])
-    }
+    const handleImage = (e: ChangeEvent<any>) => setImage(e?.target?.files[0])
+
     const handleType = (e: SelectChangeEvent<string>) => setTypeId(e.target.value)
 
     const getPlantType = useCallback(() => {
@@ -89,16 +99,41 @@ const ProductsAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Product name"
+                                label="Product name uz"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.name}
-                                name="name"
-                                error={!!touched.name && !!errors.name}
-                                helperText={touched.name && errors.name}
+                                value={values.name_uz}
+                                name="name_uz"
+                                error={!!touched.name_uz && !!errors.name_uz}
+                                helperText={touched.name_uz && errors.name_uz}
                                 sx={{ gridColumn: "span 2" }}
                             />
-                            
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Product name ru"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.name_ru}
+                                name="name_ru"
+                                error={!!touched.name_ru && !!errors.name_ru}
+                                helperText={touched.name_ru && errors.name_ru}
+                                sx={{ gridColumn: "span 2" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Product name en"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.name_en}
+                                name="name_en"
+                                error={!!touched.name_en && !!errors.name_en}
+                                helperText={touched.name_en && errors.name_en}
+                                sx={{ gridColumn: "span 2" }}
+                            />
                             <TextField
                                 fullWidth
                                 variant="filled"
@@ -116,6 +151,7 @@ const ProductsAdd = () => {
                             <FormControl fullWidth
                                 sx={{ gridColumn: "span 2" }}
                             >
+                                
                                 <InputLabel id="demo-simple-select-label">Plant Types</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
@@ -124,9 +160,10 @@ const ProductsAdd = () => {
                                     label="Plant Types"
                                     onChange={handleType}
                                 >
-                                    {types.map(({ id, name }) =>
-                                        <MenuItem value={id} key={id}>{name}</MenuItem>
-                                    )}
+                                    {types.map((item: PlantType) => {
+                                        const name: string = item[`name_${l}` as keyof PlantType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
                                 </Select>
                             </FormControl>
                             <ImageLabel htmlFor="image">
@@ -160,11 +197,15 @@ const ProductsAdd = () => {
 }
 
 const checkoutSchema = yup.object().shape({
-    name: yup.string().required("required"),
+    name_uz: yup.string().required("required"),
+    name_ru: yup.string().required("required"),
+    name_en: yup.string().required("required"),
     price: yup.number().required("required"),
 })
 const initialValues = {
-    name: "",
+    name_uz: "",
+    name_ru: "",
+    name_en: "",
     price: ""
 }
 

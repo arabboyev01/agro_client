@@ -23,10 +23,6 @@ const ModalComponent: FC<ModalComponentProps> = ({ open, setOpen, data }) => {
     const onSubmit = (values: { name: string, phone: string }) => {
         setLoader(true)
         const payload = {
-            plantName: data?.name,
-            plantVariety: 'none',
-            price: data.price,
-            image: data.image,
             customerName: values.name,
             phone: values.phone,
             productId: data.id

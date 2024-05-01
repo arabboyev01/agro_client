@@ -1,4 +1,4 @@
-import { OrderType, PlantsType } from "@/Admin/types"
+import { OrderType } from "@/Admin/types"
 
 export const ordersColumns = [
   {
@@ -9,11 +9,23 @@ export const ordersColumns = [
     _style: { width: '4%' },
   },
   {
-    key: 'plantName',
+    key: 'name_uz',
     _style: { width: '12.5%' },
   },
   {
-    key: 'avatar',
+    key: 'name_ru',
+    _style: { width: '12.5%' },
+  },
+  {
+    key: 'name_en',
+    _style: { width: '12.5%' },
+  },
+  {
+    key: 'customerName',
+    _style: { width: '12.5%' }
+  },
+  {
+    key: 'customerPhone',
     _style: { width: '12.5%' }
   },
   {
@@ -21,15 +33,7 @@ export const ordersColumns = [
     _style: { width: '12.5%' }
   },
   {
-    key: 'customerName',
-    _style: { width: '12.5%' }
-  },
-  {
-    key: 'phone',
-    _style: { width: '12.5%' }
-  },
-  {
-    key: 'productId',
+    key: 'avatar',
     _style: { width: '12.5%' }
   },
   {
@@ -42,16 +46,18 @@ export const ordersColumns = [
 ]
 
 export const dataSet = (data: OrderType[]) => {
+  console.log(data)
   if (data?.length) {
-    return data.map(({ plantName, image, id, price, customerName, phone, productId }) => {
+    return data.map(({ id, customerName, product, customerPhone }) => {
       return {
         id,
-        plantName,
-        avatar: image,
-        price,
         customerName,
-        phone,
-        productId
+        customerPhone,
+        avatar: product.image,
+        name_uz: product.name_uz,
+        name_ru: product.name_ru,
+        name_en: product.name_en,
+        price: product.price
       }
     })
   }
