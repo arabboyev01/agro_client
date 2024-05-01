@@ -74,7 +74,9 @@ export interface PlantsType {
 }
 export interface PlantType {
     id: number
-    name: string
+    name_uz: string
+    name_ru: string
+    name_en: string
     image: string
     categoryId: number
 }

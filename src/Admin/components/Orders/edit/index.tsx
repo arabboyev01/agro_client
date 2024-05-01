@@ -1,173 +1,155 @@
-import { Box, TextField } from "@mui/material"
-import { Formik } from "formik"
-import * as yup from "yup"
-import useMediaQuery from "@mui/material/useMediaQuery"
-import { CButton } from "@coreui/react"
-import { ChangeEvent, useState } from "react"
-import { ImageLabel } from "../../Products/style.products"
+import { Box, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material"
+import { CButton, CSpinner } from "@coreui/react"
+import { ChangeEvent, useCallback, useEffect, useState } from "react"
+import { api } from "@/api"
+import { toast } from "react-toastify"
+import Router from "@/hooks/router"
+import { Form, Field } from "react-final-form"
+import { Language } from '@/hooks/language'
 
-const OrderEdit = () => {
+type ProductType = {
+    id: number
+    name_uz: string
+    name_ru: string
+    name_en: string
+}
 
-    const isNonMobile = useMediaQuery("(min-width:600px)")
-    const [image, setImage] = useState<any>("")
+const OrdersEdit = () => {
 
-    const handleFormSubmit = (values: any) => {
-        console.log(values);
+    const { navigate, paramId } = Router()
+    const [products, setProducts] = useState([])
+    const [productId, setProductId] = useState('')
+    const [loader, setLoader] = useState(false)
+
+
+    const { l } = Language()
+
+    const [initialValues, setInitialValues] = useState(
+        {
+            customerName: "",
+            phone: "",
+        }
+    )
+
+    const handleSelector = (e: any) => setProductId(e.target.value)
+
+    const getProducts = useCallback(() => {
+        api.getData("products").then((data) => setProducts(data.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        getProducts()
+    }, [getProducts])
+
+    const getPlantType = useCallback(() => {
+        if (paramId) {
+            api.getData(`orders/${paramId}`).then((data) => {
+                console.log(data)
+                setInitialValues(
+                    {
+                        customerName: data.data.customerName,
+                        phone: data.data.customerPhone,
+                    }
+                )
+                setProductId(data.data.productId)
+            }).catch(err => console.log(err))
+        }
+    }, [paramId])
+
+    useEffect(() => {
+        getPlantType()
+    }, [getPlantType])
+
+
+    const handleFormSubmit = (values: ChangeEvent<HTMLInputElement> | any) => {
+        setLoader(true)
+        const formData = new FormData()
+        formData.append("customerName", values.customerName)
+        formData.append("phone", values.phone)
+        formData.append("productId", productId)
+
+        api.putData(`orders/${paramId}`, formData).then(data => {
+            if (data.success) {
+                toast.success("Orders Updated", {
+                    theme: "dark"
+                })
+                navigate("/admin/orders")
+                setLoader(false)
+            }
+            else {
+                toast.error(data.message, {
+                    theme: "dark"
+                })
+                setLoader(false)
+            }
+        }).catch(err => console.log(err))
     }
-
-    const handleImage = (e: any) => setImage(e?.target?.files[0])
 
     return (
         <Box m="20px">
-            <Formik
-                onSubmit={handleFormSubmit}
+            <Form
                 initialValues={initialValues}
-                validationSchema={checkoutSchema}
-            >
-                {({
-                    values,
-                    errors,
-                    touched,
-                    handleBlur,
-                    handleChange,
-                    handleSubmit,
-                }) => (
+                onSubmit={handleFormSubmit}
+                render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
-                        <Box
-                            display="grid"
-                            gap="30px"
-                            gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-                            sx={{
-                                "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-                            }}
-                        >
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Product name"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.name}
-                                name="name"
-                                error={!!touched.name && !!errors.name}
-                                helperText={touched.name && errors.name}
+                        <div className="box">
+                            <Field name="customerName">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        fullWidth
+                                        variant="filled"
+                                        type="text"
+                                        label="Customer name"
+                                        {...input}
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                    />
+                                )}
+                            </Field>
+                            <Field name="phone">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        fullWidth
+                                        variant="filled"
+                                        type="text"
+                                        label="Customer phone number"
+                                        {...input}
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                    />
+                                )}
+                            </Field>
+                        </div>
+                        <div className="box">
+                            <FormControl fullWidth
                                 sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="What is period of water"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.waterPeriod}
-                                name="waterPeriod"
-                                error={!!touched.waterPeriod && !!errors.waterPeriod}
-                                helperText={touched.waterPeriod && errors.waterPeriod}
-                                sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Enter yield duration"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.yieldDuration}
-                                name="yieldDuration"
-                                error={!!touched.yieldDuration && !!errors.yieldDuration}
-                                helperText={touched.yieldDuration && errors.yieldDuration}
-                                sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Enter temperature"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.temperature}
-                                name="temperature"
-                                error={!!touched.temperature && !!errors.temperature}
-                                helperText={touched.temperature && errors.temperature}
-                                sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Light Requirements"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.lightRequirement}
-                                name="lightRequirement"
-                                error={!!touched.lightRequirement && !!errors.lightRequirement}
-                                helperText={touched.lightRequirement && errors.lightRequirement}
-                                sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Cultivation method"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.cultivationMethod}
-                                name="cultivationMethod"
-                                error={!!touched.cultivationMethod && !!errors.cultivationMethod}
-                                helperText={touched.cultivationMethod && errors.cultivationMethod}
-                                sx={{ gridColumn: "span 2" }}
-                            />
-                            <ImageLabel htmlFor="image">
-                                Choose an image
-                                <TextField
-                                    fullWidth
-                                    variant="filled"
-                                    type="file"
-                                    id="image"
-                                    onBlur={handleBlur}
-                                    value={values.cultivationMethod}
-                                    name="image"
-                                    sx={{ display: 'none' }}
-                                    onChange={handleImage}
-                                />
-                            </ImageLabel>
-                            <div>
-                            <p>{image.name}</p>
-                            </div>
-                        </Box>
-                        <Box display="flex" justifyContent="end" mt="20px">
-                            <CButton color="primary">Create new Product</CButton>
-                        </Box>
+                            >
+                                <InputLabel id="demo-simple-select-label">Plant Types</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={productId}
+                                    label="Plant Types"
+                                    onChange={handleSelector}
+                                >
+                                    {products.map((item: ProductType) => {
+                                        const name: string = item[`name_${l}` as keyof ProductType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
+                                </Select>
+                            </FormControl>
+                        </div>
+                         
+                        <CButton color="primary" type="submit" style={{ display: "flex", alignItems: "center", gap: "10px"}}>
+                                Edit Order
+                                {loader && <CSpinner color="light" style={{ width: '15px', height: "15px" }} />}
+                            </CButton>
                     </form>
                 )}
-            </Formik>
+            />
         </Box>
-    );
-};
+    )
+}
 
-const phoneRegExp =
-    /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-    name: yup.string().required("required"),
-    waterPeriod: yup.string().required("required"),
-    yieldDuration: yup.string().required("required"),
-    temperature: yup
-        .string()
-        // .matches(phoneRegExp, "Phone number is not valid")
-        .required("required"),
-    lightRequirement: yup.string().required("required"),
-    cultivationMethod: yup.string().required("required"),
-});
-const initialValues = {
-    name: "",
-    waterPeriod: "",
-    yieldDuration: "",
-    temperature: "",
-    lightRequirement: "",
-    cultivationMethod: "",
-};
-
-export default OrderEdit;
+export default OrdersEdit

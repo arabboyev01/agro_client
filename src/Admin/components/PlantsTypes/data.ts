@@ -6,20 +6,23 @@ export const plantsTypeColumns = [
         label: '',
         filter: false,
         sorter: false,
-        _style: { width: '10%' },
+        _style: { width: '20%' },
       },
       {
-        key: 'name',
-        _style: { width: '30%' },
+        key: 'name_uz',
+        _style: { width: '20%' },
       },
       {
-        key: "categoryId",
-        label: "Category",
-        _style: { width: '29%' }
+        key: 'name_ru',
+        _style: { width: '20%' },
+      },
+      {
+        key: 'name_en',
+        _style: { width: '20%' },
       },
       { 
         key: 'avatar',
-        _style: { width: '30%' }
+        _style: { width: '20%' }
       },
       {
         key: 'show_details',
@@ -32,10 +35,12 @@ export const plantsTypeColumns = [
 
 export const dataSet = (data: PlantType[]) => {
   if(data?.length){
-    return data.map(({ name, image, categoryId, id}) => {
+    return data.map(({ name_uz, name_ru, name_en, image, categoryId, id}) => {
       return {
         id,
-        name,
+        name_uz,
+        name_ru,
+        name_en,
         avatar: image,
         categoryId
       }

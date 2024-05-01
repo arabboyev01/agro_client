@@ -24,6 +24,7 @@ const ConsultantAdd = () => {
         formData.append('dagree', values.dagree)
         formData.append('phone_number', values.phone_number)
         formData.append('image', image)
+        formData.append('telegram_user', values.telegram_user)
 
         api.postWithToken("consultant", formData).then(data => {
             console.log(data)
@@ -86,7 +87,7 @@ const ConsultantAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Enter message number"
+                                label="Enter consultant dagree"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.dagree}
@@ -99,13 +100,26 @@ const ConsultantAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="number"
-                                label="Enter phone number"
+                                label="Enter consultant phone number"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.phone_number}
                                 name="phone_number"
                                 error={!!touched.phone_number && !!errors.phone_number}
                                 helperText={touched.phone_number && errors.phone_number}
+                                sx={{ gridColumn: "span 2" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Enter consultant telegram username"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.telegram_user}
+                                name="telegram_user"
+                                error={!!touched.telegram_user && !!errors.telegram_user}
+                                helperText={touched.telegram_user && errors.telegram_user}
                                 sx={{ gridColumn: "span 2" }}
                             />
                             <ImageLabel htmlFor="image">
@@ -142,11 +156,13 @@ const checkoutSchema = yup.object().shape({
     fullName: yup.string().required("required"),
     dagree: yup.string().required("required"),
     phone_number: yup.string().required("required"),
+    telegram_user: yup.string().required("required"),
 })
 
 const initialValues = {
     fullName: "",
     dagree: "",
     phone_number: "",
+    telegram_user: ""
 }
 export default ConsultantAdd

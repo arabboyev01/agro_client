@@ -4,11 +4,11 @@ export const consultationColumn = [
       label: '',
       filter: false,
       sorter: false,
-      _style: { width: '20%' },
+      _style: { width: '10%' },
     },
     {
       key: 'avatar',
-      _style: { width: '20%' }
+      _style: { width: '12%' }
     },
     {
       key: 'fullName',
@@ -18,6 +18,10 @@ export const consultationColumn = [
     {
       key: 'phone_number',
       _style: { width: '20%' }
+    },
+    {
+      key: 'telegram_user',
+      _style: { width: '17%' }
     },
     {
       key: 'dagree',
@@ -44,13 +48,14 @@ export const consultationColumn = [
 
   export const dataSet = (data: ConsultationType[]) => {
     if (data?.length) {
-      return data.map(({ fullName, id, image, dagree, phone_number }) => {
+      return data.map(({ fullName, id, image, dagree, phone_number, telegram_user }) => {
         return {
           id,
           fullName,
           avatar: image,
           dagree,
-          phone_number
+          phone_number,
+          telegram_user
         }
       })
     }

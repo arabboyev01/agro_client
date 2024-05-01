@@ -19,15 +19,18 @@ const PlantTypeEdit = () => {
     const [categoryId, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const [initialValues, setInitialValues] = useState({
-        name: ''
+        name_uz: '',
+        name_ru: '',
+        name_en: ''
     })
 
     const getPlantTypes = useCallback(() => {
         if (paramId) {
             api.getData(`plants-types/${paramId}`).then((data) => {
-                console.log(data)
                 setInitialValues({
-                    name: data.data.name,
+                    name_uz: data.data.name_uz,
+                    name_ru: data.data.name_ru,
+                    name_uz: data.data.name_en
                 })
             })
                 .catch(err => console.log(err))
@@ -76,7 +79,9 @@ const PlantTypeEdit = () => {
     }
 
     const checkoutSchema = yup.object().shape({
-        name: yup.string().required("required"),
+        name_uz: yup.string().required("required"),
+        name_ru: yup.string().required("required"),
+        name_en: yup.string().required("required"),
     })
 
     return (
@@ -107,13 +112,39 @@ const PlantTypeEdit = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name"
+                                label="Plant name uz"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.name}
-                                name="name"
-                                error={!!touched.name && !!errors.name}
-                                helperText={touched.name && errors.name}
+                                value={values.name_uz}
+                                name="name_uz"
+                                error={!!touched.name_uz && !!errors.name_uz}
+                                helperText={touched.name_uz && errors.name_uz}
+                                sx={{ gridColumn: "span 2" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Plant name ru"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.name_uz}
+                                name="name_ru"
+                                error={!!touched.name_ru && !!errors.name_ru}
+                                helperText={touched.name_ru && errors.name_ru}
+                                sx={{ gridColumn: "span 2" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Plant name en"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.name_uz}
+                                name="name_en"
+                                error={!!touched.name_en && !!errors.name_en}
+                                helperText={touched.name_en && errors.name_en}
                                 sx={{ gridColumn: "span 2" }}
                             />
                             <FormControl fullWidth

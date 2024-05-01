@@ -7,7 +7,7 @@ import { toast } from "react-toastify"
 import Router from "@/hooks/router"
 import { Form, Field } from "react-final-form"
 
-const ProductEdit = () => {
+const ConsultantEdit = () => {
 
     const { navigate, paramId } = Router()
     const [types, setTypes] = useState([])
@@ -41,6 +41,7 @@ const ProductEdit = () => {
                         fullName: data.data.fullName,
                         dagree: data.data.dagree,
                         phone_number: data.data.phone_number,
+                        telegram_user: data.data.telegram_user,
                     }
                 )
             }).catch(err => console.log(err))
@@ -97,7 +98,7 @@ const ProductEdit = () => {
                                         fullWidth
                                         variant="filled"
                                         type="text"
-                                        label="Full name"
+                                        label="Consultant Full name"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}
@@ -110,7 +111,7 @@ const ProductEdit = () => {
                                         fullWidth
                                         variant="filled"
                                         type="text"
-                                        label="What is your dagree"
+                                        label="Consultant dagree"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}
@@ -126,14 +127,29 @@ const ProductEdit = () => {
                                         fullWidth
                                         variant="filled"
                                         type="text"
-                                        label="Full name"
+                                        label="Consultant phone number"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}
                                     />
                                 )}
                             </Field>
-                            <ImageLabel htmlFor="image">
+                            <Field name="telegram_user">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        fullWidth
+                                        variant="filled"
+                                        type="text"
+                                        label="Consultant phone number"
+                                        {...input}
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                    />
+                                )}
+                            </Field>
+                        </div>
+                        <div className="box">
+                             <ImageLabel htmlFor="image">
                                 Choose an image
                                 <TextField
                                     fullWidth
@@ -162,5 +178,4 @@ const ProductEdit = () => {
         </Box>
     )
 }
-
-export default ProductEdit
+export default ConsultantEdit
