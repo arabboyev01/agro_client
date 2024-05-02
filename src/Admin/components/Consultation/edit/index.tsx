@@ -19,6 +19,7 @@ const ConsultantEdit = () => {
             fullName: "",
             dagree: "",
             phone_number: "",
+            telegram_user: ""
         }
     );
 
