@@ -1,6 +1,5 @@
 import { Box, TextField } from "@mui/material"
-import * as yup from "yup"
-import { CButton } from "@coreui/react"
+import { CButton, CSpinner } from "@coreui/react"
 import { ChangeEvent, useCallback, useEffect, useState } from "react"
 import { ImageLabel } from "../../Products/style.products"
 import { api } from "@/api"
@@ -12,16 +11,25 @@ const PlantTypeEdit = () => {
 
     const { navigate, paramId } = Router()
 
+    const [loader, setLoader] = useState(false)
     const [image, setImage] = useState<string | any>("")
-    const [initialValues, setInitialValues] = useState({ name: '', plantType: '' });
+    const [initialValues, setInitialValues] = useState({
+        name_uz: '',
+        name_ru: '',
+        name_en: '',
+        plantType: ''
+    });
 
     const handleImage = (e: any) => setImage(e?.target?.files[0])
 
     const getPlantType = useCallback(() => {
         if (paramId) {
             api.getData(`plants-category/${paramId}`).then((data) => {
+                console.log(data)
                 setInitialValues({
-                    name: data.data.name,
+                    name_uz: data.data.name_uz,
+                    name_ru: data.data.name_ru,
+                    name_en: data.data.name_en,
                     plantType: data.data.plantType,
                 })
             })
@@ -35,8 +43,12 @@ const PlantTypeEdit = () => {
 
 
     const handleFormSubmit = (values: ChangeEvent<HTMLInputElement> | any) => {
+        console.log(values)
+        setLoader(true)
         const formData = new FormData()
-        formData.append("name", values.name)
+        formData.append("name_uz", values.name_uz)
+        formData.append("name_ru", values.name_ru)
+        formData.append("name_en", values.name_en)
         formData.append("image", image)
         formData.append("plantType", values.plantType)
 
@@ -45,37 +57,61 @@ const PlantTypeEdit = () => {
                 toast.success("Plant Type Updated", {
                     theme: "dark"
                 })
-                navigate("/admin/plants-type")
+                navigate("/admin/plants-category")
+                setLoader(false)
             }
             else {
                 toast.error(data.message, {
                     theme: "dark"
                 })
+                setLoader(false)
             }
         }).catch(err => console.log(err))
     }
-
-    const checkoutSchema = () => yup.object().shape({
-        name: yup.string().required("required"),
-        plantType: yup.string().required("required"),
-    })
 
     return (
         <Box m="20px">
             <Form
                 initialValues={initialValues}
                 onSubmit={handleFormSubmit}
-                // validate={checkoutSchema}
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                         <div className="box">
-                            <Field name="name">
+                            <Field name="name_uz">
                                 {({ input, meta }) => (
                                     <TextField
                                         fullWidth
                                         variant="filled"
                                         type="text"
-                                        label="Plant name"
+                                        label="Plant name uz"
+                                        {...input}
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                    />
+                                )}
+                            </Field>
+                            <Field name="name_ru">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        fullWidth
+                                        variant="filled"
+                                        type="text"
+                                        label="Plant name ru"
+                                        {...input}
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                    />
+                                )}
+                            </Field>
+                        </div>
+                        <div className="box">
+                            <Field name="name_en">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        fullWidth
+                                        variant="filled"
+                                        type="text"
+                                        label="Plant name en"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}
@@ -109,10 +145,11 @@ const PlantTypeEdit = () => {
                                     onChange={handleImage}
                                 />
                             </ImageLabel>
-                            <div>
-                                <p>{typeof image === "object" && image.name}</p>
-                            </div>
-                            <CButton color="primary" type="submit">Create new Product</CButton>
+                            <div> <p>{typeof image === "object" && image.name}</p> </div>
+                            <CButton color="primary" type="submit" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                Create new Product
+                                {loader && <CSpinner color="light" style={{ width: '15px', height: "15px" }} />}
+                            </CButton>
                         </div>
                     </form>
                 )}
@@ -120,5 +157,4 @@ const PlantTypeEdit = () => {
         </Box>
     )
 }
-
 export default PlantTypeEdit

@@ -31,7 +31,9 @@ export interface ProductsProp<T> {
 export interface PlantProps {
     id: number
     image: string
-    name: string
+    name_uz: string
+    name_ru: string
+    name_en: string
     plantType: string
     plantTypes: string[]
 }
@@ -62,15 +64,15 @@ export interface ProductsType {
 
 export interface PlantsType {
     id: number
-    name: string
+    name_uz: string
+    name_ru: string
+    name_en: string
+    describtion_uz: string
+    describtion_ru: string
+    describtion_en: string
     image: string
     plantTypeId: number
     plantsCategoryId: number
-    waterPeriod: string
-    yieldDuration: string
-    temperature: string
-    lightRequirement: string
-    cultivationMethod: string
 }
 export interface PlantType {
     id: number

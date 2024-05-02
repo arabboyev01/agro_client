@@ -16,15 +16,20 @@ interface Props {
     type: any
     category: any
     handleData: () => void
-    data: data[] | null
+    data: dataType[] | null
     l: string
 }
 
-type data = {
+
+type dataType = {
+    name_uz: string
+    name_ru: string
+    name_en: string
+    describtion_uz: string
+    describtion_ru: string
+    describtion_en: string
     id: number
-    categoryId: number
     image: string
-    name: string
 }
 
 const DumbVarities: FC<Props> = ({ lang, handleRoute, categories, types, setType, setCategory, category, type, handleData, data, l }) => (
@@ -40,8 +45,8 @@ const DumbVarities: FC<Props> = ({ lang, handleRoute, categories, types, setType
         </S.LeftContent>
         <SS.VarityComponent>
             <SS.VaritySelectors>
-                <VarityDropdown data={categories} setValue={setCategory} value={category?.name} text={lang('select_type')} l={l} />
-                <VarityDropdown data={types} setValue={setType} value={type?.name} text={lang('select_plant')} l={l} />
+                <VarityDropdown data={categories} setValue={setCategory} value={category?.[`name_${l}`]} text={lang('select_type')} l={l} />
+                <VarityDropdown data={types} setValue={setType} value={type?.[`name_${l}`]} text={lang('select_plant')} l={l} />
                 <div>
                     <MainButton onClick={handleData} width={200} height={50} text={lang('home.search')} />
                 </div>
@@ -50,12 +55,15 @@ const DumbVarities: FC<Props> = ({ lang, handleRoute, categories, types, setType
                 <SS.MainText>{lang('varity_title')}</SS.MainText>
             </SS.VarietyContent>
             <SS.VaritiesWrapper>
-                {data && data.map((item) => {
+                {data && data.map((item: dataType) => {
+                    console.log(item)
+                    const name: string = item[`name_${l}` as keyof dataType] as string
+                    const description: string = item[`describtion_${l}` as keyof dataType] as string
                     return <SS.VarityType key={item.id}>
                         <SS.VarityImage src={item.image} alt={`image_${item.id}`} />
                         <div>
-                            <SS.VarityName>{item.name}</SS.VarityName>
-                            <SS.VarityText>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley</SS.VarityText>
+                            <SS.VarityName>{name}</SS.VarityName>
+                            <SS.VarityText>{description}</SS.VarityText>
 
                         </div>
                     </SS.VarityType>

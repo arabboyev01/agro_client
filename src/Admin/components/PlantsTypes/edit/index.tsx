@@ -3,15 +3,25 @@ import { Formik } from "formik"
 import * as yup from "yup"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { CButton, CSpinner } from "@coreui/react"
-import { ChangeEvent, useCallback, useEffect, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useLayoutEffect, useState } from "react"
 import { ImageLabel } from "../../Products/style.products"
 import { api } from "@/api"
 import { toast } from "react-toastify"
 import Router from "@/hooks/router"
+import { Language } from "@/hooks/language"
+
+type PlantType = {
+    name_uz: string
+    name_eu: string
+    name_en: string
+    categoryId: number
+    id: number
+}
 
 const PlantTypeEdit = () => {
 
     const { navigate, paramId } = Router()
+    const {l} = Language()
 
     const isNonMobile = useMediaQuery("(min-width:600px)")
     const [image, setImage] = useState<string | any>("")
@@ -24,22 +34,19 @@ const PlantTypeEdit = () => {
         name_en: ''
     })
 
-    const getPlantTypes = useCallback(() => {
+    useLayoutEffect(() => {
         if (paramId) {
             api.getData(`plants-types/${paramId}`).then((data) => {
+                console.log(data)
                 setInitialValues({
                     name_uz: data.data.name_uz,
                     name_ru: data.data.name_ru,
                     name_en: data.data.name_en
                 })
-            })
-                .catch(err => console.log(err))
+                setCategory(data.data.categoryId)
+            }).catch(err => console.log(err))
         }
     }, [paramId])
-
-    useEffect(() => {
-        getPlantTypes()
-    }, [getPlantTypes])
 
     const getPlantType = useCallback(() => {
         api.getData("plants-category").then((data) => setCategories(data.data))
@@ -159,9 +166,10 @@ const PlantTypeEdit = () => {
                                     onChange={handleSelector}
                                     name="categoryId"
                                 >
-                                    {categories.map(({ id, name }) =>
-                                        <MenuItem value={id} key={id}>{name}</MenuItem>
-                                    )}
+                                    {categories.map((item: PlantType) => {
+                                        const name: string = item[`name_${l}` as keyof PlantType] as string
+                                       return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
                                 </Select>
                             </FormControl>
                             <ImageLabel htmlFor="image">

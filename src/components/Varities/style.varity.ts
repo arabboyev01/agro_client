@@ -134,7 +134,7 @@ export const VarityImage = styled.img`
 `;
 
 export const VarityName = styled.h2`
-  font-size: 30px;
+  font-size: 26px;
   line-height: 32px;
   font-weight: 900;
   color: #4f4f4f;

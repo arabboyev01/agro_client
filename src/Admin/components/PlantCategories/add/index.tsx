@@ -22,7 +22,9 @@ const PlantCategoryAdd = () => {
     const handleFormSubmit = (values: ChangeEvent<HTMLInputElement> | any) => {
         setLoader(true)
         const formData = new FormData()
-        formData.append("name", values.name)
+        formData.append("name_uz", values.name_uz)
+        formData.append("name_ru", values.name_ru)
+        formData.append("name_en", values.name_en)
         formData.append("image", image)
         formData.append("plantType", values.plantType)
 
@@ -72,13 +74,39 @@ const PlantCategoryAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name"
+                                label="Plant name uz"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.name}
-                                name="name"
-                                error={!!touched.name && !!errors.name}
-                                helperText={touched.name && errors.name}
+                                value={values.name_uz}
+                                name="name_uz"
+                                error={!!touched.name_uz && !!errors.name_uz}
+                                helperText={touched.name_uz && errors.name_uz}
+                                sx={{ gridColumn: "span 2" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Plant name ru"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.name_ru}
+                                name="name_ru"
+                                error={!!touched.name_ru && !!errors.name_ru}
+                                helperText={touched.name_ru && errors.name_ru}
+                                sx={{ gridColumn: "span 2" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Plant name en"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.name_en}
+                                name="name_en"
+                                error={!!touched.name_en && !!errors.name_en}
+                                helperText={touched.name_en && errors.name_en}
                                 sx={{ gridColumn: "span 2" }}
                             />
                             <TextField
@@ -112,9 +140,9 @@ const PlantCategoryAdd = () => {
                             </div>
                         </Box>
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <CButton color="primary" type="submit" style={{display: "flex", alignItems: "center", gap: "10px"}}>
+                            <CButton color="primary" type="submit" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                                 Create new Product
-                                {loader && <CSpinner color="light"  style={{width: '15px', height: "15px"}}/>}
+                                {loader && <CSpinner color="light" style={{ width: '15px', height: "15px" }} />}
                             </CButton>
                         </Box>
                     </form>
@@ -125,11 +153,15 @@ const PlantCategoryAdd = () => {
 }
 
 const checkoutSchema = yup.object().shape({
-    name: yup.string().required("required"),
+    name_uz: yup.string().required("required"),
+    name_ru: yup.string().required("required"),
+    name_en: yup.string().required("required"),
     plantType: yup.string().required("required"),
 })
 const initialValues = {
-    name: "",
+    name_uz: "",
+    name_ru: "",
+    name_en: "",
     plantType: "",
 }
 

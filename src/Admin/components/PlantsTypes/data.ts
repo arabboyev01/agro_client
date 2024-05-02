@@ -6,19 +6,19 @@ export const plantsTypeColumns = [
         label: '',
         filter: false,
         sorter: false,
-        _style: { width: '20%' },
+        _style: { width: '10%' },
       },
       {
         key: 'name_uz',
-        _style: { width: '20%' },
+        _style: { width: '25%' },
       },
       {
         key: 'name_ru',
-        _style: { width: '20%' },
+        _style: { width: '25%' },
       },
       {
         key: 'name_en',
-        _style: { width: '20%' },
+        _style: { width: '25%' },
       },
       { 
         key: 'avatar',

@@ -1,18 +1,29 @@
 import { Box, TextField, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from "@mui/material"
-import { Formik } from "formik"
+import { Formik, Field } from "formik"
 import * as yup from "yup"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { CButton, CSpinner } from "@coreui/react"
 import { ImageLabel } from "../../Products/style.products"
-import { ChangeEvent, useState } from "react"
+import { useState } from "react"
 import { useCallback, useEffect } from "react"
 import { api } from "@/api"
 import { toast } from "react-toastify"
 import Router from "@/hooks/router"
+import { Language } from "@/hooks/language"
 
+type PlantsType = {
+    id: number
+    name_uz: string
+    name_ru: string
+    name_en: string
+    describtion_uz: string
+    describtion_ru: string
+    describtion_en: string
+}
 const PlantsAdd = () => {
 
     const { navigate } = Router()
+    const { l } = Language()
 
     const isNonMobile = useMediaQuery("(min-width:600px)")
     const [image, setImage] = useState<any | object>("")
@@ -42,18 +53,19 @@ const PlantsAdd = () => {
     }, [getPlantType, getPlantCategories])
 
     const handleFormSubmit = (values: any) => {
+        console.log(values)
         setLoader(true)
         const formData = new FormData()
 
-        formData.append("name", values.name)
+        formData.append("name_uz", values.name_uz)
+        formData.append("name_ru", values.name_ru)
+        formData.append("name_en", values.name_en)
+        formData.append("describtion_uz", values.descibtion_uz)
+        formData.append("describtion_ru", values.descibtion_ru)
+        formData.append("describtion_en", values.descibtion_en)
         formData.append("image", image)
         formData.append("plantsCategoryId", categoryId)
         formData.append("plantTypeId", typeId)
-        formData.append("waterPeriod", values.waterPeriod)
-        formData.append("yieldDuration", values.yieldDuration)
-        formData.append("temperature", values.temperature)
-        formData.append("lightRequirement", values.lightRequirement)
-        formData.append("cultivationMethod", values.cultivationMethod)
 
         api.postWithToken("plant", formData).then((data) => {
             if (data.success) {
@@ -62,7 +74,7 @@ const PlantsAdd = () => {
                 })
                 navigate("/admin/plants")
                 setLoader(false)
-            }else {
+            } else {
                 toast.error(data.message, {
                     theme: "dark"
                 })
@@ -104,83 +116,117 @@ const PlantsAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name"
+                                label="Plant name uz"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.name}
-                                name="name"
-                                error={!!touched.name && !!errors.name}
-                                helperText={touched.name && errors.name}
+                                value={values.name_uz}
+                                name="name_uz"
+                                error={!!touched.name_uz && !!errors.name_uz}
+                                helperText={touched.name_uz && errors.name_uz}
                                 sx={{ gridColumn: "span 2" }}
                             />
                             <TextField
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="What is period of water"
+                                label="Plant name ru"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.waterPeriod}
-                                name="waterPeriod"
-                                error={!!touched.waterPeriod && !!errors.waterPeriod}
-                                helperText={touched.waterPeriod && errors.waterPeriod}
-                                sx={{ gridColumn: "span 2" }}
+                                value={values.name_ru}
+                                name="name_ru"
+                                error={!!touched.name_ru && !!errors.name_ru}
+                                helperText={touched.name_ru && errors.name_ru}
+                                sx={{ gridColumn: "span 1" }}
                             />
                             <TextField
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Enter yield duration"
+                                label="Plant name en"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.yieldDuration}
-                                name="yieldDuration"
-                                error={!!touched.yieldDuration && !!errors.yieldDuration}
-                                helperText={touched.yieldDuration && errors.yieldDuration}
-                                sx={{ gridColumn: "span 2" }}
+                                value={values.name_en}
+                                name="name_en"
+                                error={!!touched.name_en && !!errors.name_en}
+                                helperText={touched.name_en && errors.name_en}
+                                sx={{ gridColumn: "span 1" }}
                             />
-                            <TextField
+
+                            <Field
                                 fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Enter temperature"
+                                multiline
+                                rows={5}
+                                name="descibtion_ru"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.temperature}
-                                name="temperature"
-                                error={!!touched.temperature && !!errors.temperature}
-                                helperText={touched.temperature && errors.temperature}
+                                value={values.descibtion_ru}
+                                error={touched.descibtion_ru && !!errors.descibtion_ru}
+                                helperText={touched.descibtion_ru && errors.descibtion_ru}
                                 sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
+                            >
+                                {({ field }: any) => (
+                                    <TextField
+                                        {...field}
+                                        fullWidth
+                                        multiline
+                                        rows={4}
+                                        variant="filled"
+                                        label="Description ru"
+                                        sx={{ width: '100%' }}
+                                    />
+                                )}
+                            </Field>
+                            <Field
                                 fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Light Requirements"
+                                multiline
+                                rows={5}
+                                name="descibtion_en"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.lightRequirement}
-                                name="lightRequirement"
-                                error={!!touched.lightRequirement && !!errors.lightRequirement}
-                                helperText={touched.lightRequirement && errors.lightRequirement}
+                                value={values.descibtion_en}
+                                error={touched.descibtion_en && !!errors.descibtion_en}
+                                helperText={touched.descibtion_en && errors.descibtion_en}
                                 sx={{ gridColumn: "span 2" }}
-                            />
-                            <TextField
+                            >
+                                {({ field }: any) => (
+                                    <TextField
+                                        {...field}
+                                        fullWidth
+                                        multiline
+                                        rows={4}
+                                        variant="filled"
+                                        label="Description en"
+                                        sx={{ width: '100%' }}
+                                    />
+                                )}
+                            </Field>
+                            <Field
                                 fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Cultivation method"
+                                multiline
+                                rows={5}
+                                name="descibtion_uz"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.cultivationMethod}
-                                name="cultivationMethod"
-                                error={!!touched.cultivationMethod && !!errors.cultivationMethod}
-                                helperText={touched.cultivationMethod && errors.cultivationMethod}
+                                value={values.descibtion_uz}
+                                error={touched.descibtion_uz && !!errors.descibtion_uz}
+                                helperText={touched.descibtion_uz && errors.descibtion_uz}
                                 sx={{ gridColumn: "span 2" }}
-                            />
-                            <FormControl 
-                            fullWidth
-                            sx={{ gridColumn: "span 2" }}
+                            >
+                                {({ field }: any) => (
+                                    <TextField
+                                        {...field}
+                                        fullWidth
+                                        multiline
+                                        rows={4}
+                                        variant="filled"
+                                        label="Description uz"
+                                        sx={{ width: '100%' }}
+                                    />
+                                )}
+                            </Field>
+                            <FormControl
+                                fullWidth
+                                sx={{ gridColumn: "span 2" }}
                             >
                                 <InputLabel id="demo-simple-select-label">Plant Categories</InputLabel>
                                 <Select
@@ -190,9 +236,10 @@ const PlantsAdd = () => {
                                     label="Plant Categories"
                                     onChange={handleSelector}
                                 >
-                                    {categories.map(({ id, name }) =>
-                                        <MenuItem value={id} key={id}>{name}</MenuItem>
-                                    )}
+                                    {categories.map((item: PlantsType) => {
+                                        const name: string = item[`name_${l}` as keyof PlantsType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
                                 </Select>
                             </FormControl>
                             <FormControl fullWidth
@@ -206,9 +253,10 @@ const PlantsAdd = () => {
                                     label="Plant Types"
                                     onChange={handleType}
                                 >
-                                    {types.map(({ id, name }) =>
-                                        <MenuItem value={id} key={id}>{name}</MenuItem>
-                                    )}
+                                    {types.map((item: PlantsType) => {
+                                        const name: string = item[`name_${l}` as keyof PlantsType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
                                 </Select>
                             </FormControl>
                             <ImageLabel htmlFor="image">
@@ -240,21 +288,21 @@ const PlantsAdd = () => {
 }
 
 const checkoutSchema = yup.object().shape({
-    name: yup.string().required("required"),
-    waterPeriod: yup.string().required("required"),
-    yieldDuration: yup.string().required("required"),
-    temperature: yup.string().required("required"),
-    lightRequirement: yup.string().required("required"),
-    cultivationMethod: yup.string().required("required"),
+    name_uz: yup.string().required("required"),
+    name_ru: yup.string().required("required"),
+    name_en: yup.string().required("required"),
+    descibtion_uz: yup.string().required("required"),
+    descibtion_ru: yup.string().required("required"),
+    descibtion_en: yup.string().required("required"),
 })
 
 const initialValues = {
-    name: "",
-    waterPeriod: "",
-    yieldDuration: "",
-    temperature: "",
-    lightRequirement: "",
-    cultivationMethod: "",
+    name_uz: "",
+    name_ru: "",
+    name_en: "",
+    descibtion_uz: "",
+    descibtion_ru: "",
+    descibtion_en: ""
 }
 
 export default PlantsAdd

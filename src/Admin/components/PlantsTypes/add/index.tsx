@@ -8,10 +8,19 @@ import { ImageLabel } from "../../Products/style.products"
 import { api } from "@/api"
 import { toast } from "react-toastify"
 import Router from "@/hooks/router"
+import { Language } from "@/hooks/language"
+
+type categoryType = {
+    name_uz: string
+    name_ru: string
+    name_en: string
+    id: number
+}
 
 const PlantTypeAdd = () => {
 
     const { navigate } = Router()
+    const { l } = Language()
 
     const isNonMobile = useMediaQuery("(min-width:600px)")
     const [image, setImage] = useState<string | any>("")
@@ -35,7 +44,9 @@ const PlantTypeAdd = () => {
     const handleFormSubmit = (values: ChangeEvent<HTMLInputElement> | any) => {
         setLoader(true)
         const formData = new FormData()
-        formData.append("name", values.name)
+        formData.append("name_uz", values.name_uz)
+        formData.append("name_ru", values.name_ru)
+        formData.append("name_en", values.name_en)
         formData.append("image", image)
         formData.append("categoryId", categoryId)
 
@@ -84,13 +95,39 @@ const PlantTypeAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name"
+                                label="Plant name uz"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.name}
-                                name="name"
-                                error={!!touched.name && !!errors.name}
-                                helperText={touched.name && errors.name}
+                                value={values.name_uz}
+                                name="name_uz"
+                                error={!!touched.name_uz && !!errors.name_uz}
+                                helperText={touched.name_uz && errors.name_uz}
+                                sx={{ gridColumn: "span 2" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Plant name ru"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.name_ru}
+                                name="name_ru"
+                                error={!!touched.name_ru && !!errors.name_ru}
+                                helperText={touched.name_ru && errors.name_ru}
+                                sx={{ gridColumn: "span 2" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Plant name en"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.name_en}
+                                name="name_en"
+                                error={!!touched.name_en && !!errors.name_en}
+                                helperText={touched.name_en && errors.name_en}
                                 sx={{ gridColumn: "span 2" }}
                             />
                             <FormControl fullWidth
@@ -105,9 +142,10 @@ const PlantTypeAdd = () => {
                                     onChange={handleSelector}
                                     name="categoryId"
                                 >
-                                    {categories.map(({ id, name }) =>
-                                        <MenuItem value={id} key={id}>{name}</MenuItem>
-                                    )}
+                                    {categories.map((item: categoryType) => {
+                                        const name: string = item[`name_${l}` as keyof categoryType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
                                 </Select>
                             </FormControl>
                             <ImageLabel htmlFor="image">
@@ -141,9 +179,13 @@ const PlantTypeAdd = () => {
 }
 
 const checkoutSchema = yup.object().shape({
-    name: yup.string().required("required"),
+    name_uz: yup.string().required("required"),
+    name_ru: yup.string().required("required"),
+    name_en: yup.string().required("required"),
 })
 const initialValues = {
-    name: "",
+    name_uz: "",
+    name_ru: "",
+    name_en: "",
 }
 export default PlantTypeAdd

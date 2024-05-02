@@ -9,40 +9,31 @@ export const plantsTypeColumns = [
     _style: { width: '4%' },
   },
   {
-    key: 'name',
+    key: 'name_uz',
     _style: { width: '12%' },
   },
   {
+    key: 'name_ru',
+    _style: { width: '12%' },
+  },
+  {
+    key: 'name_en',
+    _style: { width: '12%' },
+  },
+  {
+    key: 'describtion_uz',
+    _style: { width: '12%' }
+  },
+  {
+    key: 'describtion_ru',
+    _style: { width: '12%' }
+  },
+  {
+    key: 'describtion_en',
+    _style: { width: '12%' }
+  },
+  {
     key: 'avatar',
-    _style: { width: '12%' }
-  },
-  // {
-  //   key: 'plantType',
-  //   _style: { width: '10%' }
-  // },
-  // {
-  //   key: 'plantsCategory',
-  //   _style: { width: '10%' },
-  //   label: 'Category',
-  // },
-  {
-    key: 'waterPeriod',
-    _style: { width: '12%' }
-  },
-  {
-    key: 'yieldDuration',
-    _style: { width: '12%' }
-  },
-  {
-    key: 'temperature',
-    _style: { width: '12%' }
-  },
-  {
-    key: 'lightRequirement',
-    _style: { width: '12%' }
-  },
-  {
-    key: 'cultivationMethod',
     _style: { width: '12%' }
   },
   {
@@ -56,18 +47,18 @@ export const plantsTypeColumns = [
 
 export const dataSet = (data: PlantsType[]) => {
   if (data?.length) {
-    return data.map(({ name, image, id, plantTypeId, plantsCategoryId, waterPeriod, yieldDuration, temperature, lightRequirement, cultivationMethod }) => {
+    return data.map(({ name_uz, name_ru, name_en, image, id, plantTypeId, plantsCategoryId, describtion_uz, describtion_ru, describtion_en }) => {
       return {
         id,
-        name,
+        name_uz,
+        name_ru,
+        name_en,
         avatar: image,
         plantTypeId,
         plantsCategoryId,
-        waterPeriod,
-        yieldDuration,
-        temperature,
-        lightRequirement,
-        cultivationMethod
+        describtion_uz,
+        describtion_ru,
+        describtion_en,
       }
     })
   }
