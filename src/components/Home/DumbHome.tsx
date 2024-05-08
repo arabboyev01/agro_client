@@ -29,13 +29,13 @@ const DumbHomePage: FC<Props> = ({ lang, handleRoute, callButton }) => (
             <MainButton width={185} height={45} text={lang('call')} textSize={12} onClick={callButton}/>
 
             <S.MiddleContact>
-                <S.ContactInfo>
+                <S.ContactInfo onClick={callButton}>
                     <PhoneSVG />
-                    <S.ContactText onClick={callButton}>{lang('call')}</S.ContactText>
+                    <S.ContactText>{lang('call')}</S.ContactText>
                 </S.ContactInfo>
-                <S.ContactInfo>
+                <S.ContactInfo onClick={() => clickTelegram('spaceagrouz')}>
                     <EmailSVG />
-                    <S.ContactText onClick={() => clickTelegram('spaceagro')}>
+                    <S.ContactText>
                         {lang('message')}
                     </S.ContactText>
                 </S.ContactInfo>

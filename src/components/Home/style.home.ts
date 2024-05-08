@@ -162,6 +162,7 @@ export const ContactInfo = styled.div`
   padding: 12px 24px;
   border-radius: 8px;
   box-shadow: 3px 0px 30px -7px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 `;
 export const ContactText = styled.p``;
 export const EndContent = styled.div`

@@ -53,7 +53,6 @@ const PlantsAdd = () => {
     }, [getPlantType, getPlantCategories])
 
     const handleFormSubmit = (values: any) => {
-        console.log(values)
         setLoader(true)
         const formData = new FormData()
 

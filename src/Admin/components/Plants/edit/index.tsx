@@ -1,5 +1,4 @@
-import { Box, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material"
-import * as yup from "yup"
+import { Box, TextField, FormControl, InputLabel, Select, MenuItem, TextareaAutosize } from "@mui/material"
 import { CButton } from "@coreui/react"
 import { ChangeEvent, useCallback, useEffect, useState } from "react"
 import { ImageLabel } from "../../Products/style.products"
@@ -7,8 +6,21 @@ import { api } from "@/api"
 import { toast } from "react-toastify"
 import Router from "@/hooks/router"
 import { Form, Field } from "react-final-form"
+import { Language } from "@/hooks/language"
+
+type PlantsType = {
+    id: number
+    name_uz: string
+    name_ru: string
+    name_en: string
+    describtion_uz: string
+    describtion_ru: string
+    describtion_en: string
+}
 
 const PlantEdit = () => {
+
+    const { l } = Language()
 
     const { navigate, paramId } = Router()
     const [categories, setCategories] = useState([])
@@ -19,12 +31,12 @@ const PlantEdit = () => {
     const [image, setImage] = useState<string | any>("")
     const [initialValues, setInitialValues] = useState(
         {
-            name: "",
-            waterPeriod: "",
-            yieldDuration: "",
-            temperature: "",
-            lightRequirement: "",
-            cultivationMethod: "",
+            name_uz: "",
+            name_ru: "",
+            name_en: "",
+            describtion_uz: "",
+            describtion_ru: "",
+            describtion_en: "",
         }
     );
 
@@ -49,15 +61,15 @@ const PlantEdit = () => {
     const getPlantType = useCallback(() => {
         if (paramId) {
             api.getData(`plant/${paramId}`).then((data) => {
-                console.log(data)
+
                 setInitialValues(
                     {
-                        name: data.data.name,
-                        waterPeriod: data.data.waterPeriod,
-                        yieldDuration: data.data.yieldDuration,
-                        temperature: data.data.temperature,
-                        lightRequirement: data.data.lightRequirement,
-                        cultivationMethod: data.data.cultivationMethod,
+                        name_uz: data.data.name_uz,
+                        name_ru: data.data.name_ru,
+                        name_en: data.data.name_en,
+                        describtion_uz: data.data.describtion_uz,
+                        describtion_ru: data.data.describtion_ru,
+                        describtion_en: data.data.describtion_en
                     }
                 )
                 setCategory(data.data.plantsCategoryId)
@@ -107,54 +119,26 @@ const PlantEdit = () => {
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                         <div className="box">
-                            <Field name="name">
+                            <Field name="name_uz">
                                 {({ input, meta }) => (
                                     <TextField
                                         fullWidth
                                         variant="filled"
                                         type="text"
-                                        label="Plant name"
+                                        label="Plant name uz"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}
                                     />
                                 )}
                             </Field>
-                            <Field name="waterPeriod">
+                            <Field name="name_ru">
                                 {({ input, meta }) => (
                                     <TextField
                                         fullWidth
                                         variant="filled"
                                         type="text"
-                                        label="What is period of water"
-                                        {...input}
-                                        error={meta.touched && meta.error}
-                                        helperText={meta.touched && meta.error}
-                                    />
-                                )}
-                            </Field>
-                        </div>
-                        <div className="box">
-                        <Field name="yieldDuration">
-                                {({ input, meta }) => (
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="Enter yield duration"
-                                        {...input}
-                                        error={meta.touched && meta.error}
-                                        helperText={meta.touched && meta.error}
-                                    />
-                                )}
-                            </Field>
-                            <Field name="temperature">
-                                {({ input, meta }) => (
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="Enter temperature"
+                                        label="Plant name ru"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}
@@ -163,26 +147,13 @@ const PlantEdit = () => {
                             </Field>
                         </div>
                         <div className="box">
-                        <Field name="lightRequirement">
+                            <Field name="name_en">
                                 {({ input, meta }) => (
                                     <TextField
                                         fullWidth
                                         variant="filled"
                                         type="text"
-                                        label="Light Requirements"
-                                        {...input}
-                                        error={meta.touched && meta.error}
-                                        helperText={meta.touched && meta.error}
-                                    />
-                                )}
-                            </Field>
-                            <Field name="cultivationMethod">
-                                {({ input, meta }) => (
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="Cultivation method"
+                                        label="Plant name en"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}
@@ -191,21 +162,71 @@ const PlantEdit = () => {
                             </Field>
                         </div>
                         <div className="box">
-                        <FormControl 
-                            fullWidth
-                            sx={{ gridColumn: "span 2" }}
+                            <Field name="describtion_uz">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        {...input}
+                                        fullWidth
+                                        multiline
+                                        rows={5}
+                                        variant="filled"
+                                        label="Description uz"
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                        sx={{ width: '100%', gridColumn: "span 2" }}
+                                    />
+                                )}
+                            </Field>
+                            <Field name="describtion_ru">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        {...input}
+                                        fullWidth
+                                        multiline
+                                        rows={5}
+                                        variant="filled"
+                                        label="Description ru"
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                        sx={{ width: '100%', gridColumn: "span 2" }}
+                                    />
+                                )}
+                            </Field>
+                        </div>
+                        <div className="box">
+                        <Field name="describtion_en">
+                                {({ input, meta }) => (
+                                    <TextField
+                                        {...input}
+                                        fullWidth
+                                        multiline
+                                        rows={5}
+                                        variant="filled"
+                                        label="Description en"
+                                        error={meta.touched && meta.error}
+                                        helperText={meta.touched && meta.error}
+                                        sx={{ width: '100%', gridColumn: "span 2" }}
+                                    />
+                                )}
+                            </Field>
+                        </div>
+                        <div className="box">
+                            <FormControl
+                                fullWidth
+                                sx={{ gridColumn: "span 2" }}
                             >
                                 <InputLabel id="demo-simple-select-label">Plant Categories</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
+                                    id="demo-simple-select"me
                                     value={categoryId}
                                     label="Plant Categories"
                                     onChange={handleSelector}
                                 >
-                                    {categories.map(({ id, name }) =>
-                                        <MenuItem value={id} key={id}>{name}</MenuItem>
-                                    )}
+                                    {categories.map((item) => {
+                                        const name: string = item[`name_${l}` as keyof PlantsType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
                                 </Select>
                             </FormControl>
                             <FormControl fullWidth
@@ -219,9 +240,10 @@ const PlantEdit = () => {
                                     label="Plant Types"
                                     onChange={handleType}
                                 >
-                                    {types.map(({ id, name }) =>
-                                        <MenuItem value={id} key={id}>{name}</MenuItem>
-                                    )}
+                                    {types.map((item) => {
+                                        const name: string = item[`name_${l}` as keyof PlantsType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
                                 </Select>
                             </FormControl>
                         </div>

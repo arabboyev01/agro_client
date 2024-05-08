@@ -151,8 +151,8 @@ export const HomeIcon3 = () => (
 );
 export const PhoneSVG = () => (
   <svg
-    width="44"
-    height="44"
+    width="40"
+    height="40"
     viewBox="0 0 44 44"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -169,8 +169,8 @@ export const PhoneSVG = () => (
 );
 export const EmailSVG = () => (
   <svg
-    width="45"
-    height="44"
+    width="40"
+    height="40"
     viewBox="0 0 45 44"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
