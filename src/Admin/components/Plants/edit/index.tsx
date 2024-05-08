@@ -218,12 +218,12 @@ const PlantEdit = () => {
                                 <InputLabel id="demo-simple-select-label">Plant Categories</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
-                                    id="demo-simple-select"me
+                                    id="demo-simple-select"
                                     value={categoryId}
                                     label="Plant Categories"
                                     onChange={handleSelector}
                                 >
-                                    {categories.map((item) => {
+                                    {categories.map((item: PlantsType) => {
                                         const name: string = item[`name_${l}` as keyof PlantsType] as string
                                         return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
                                     })}
@@ -240,7 +240,7 @@ const PlantEdit = () => {
                                     label="Plant Types"
                                     onChange={handleType}
                                 >
-                                    {types.map((item) => {
+                                    {types.map((item: PlantsType) => {
                                         const name: string = item[`name_${l}` as keyof PlantsType] as string
                                         return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
                                     })}
