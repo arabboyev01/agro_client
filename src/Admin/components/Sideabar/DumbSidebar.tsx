@@ -1,36 +1,40 @@
-import { CNavGroup, CNavItem, CNavTitle, CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
-import { cilHome, cilPuzzle, cilFlower, cilWrapText, cilWc, cilUser, cilEco } from '@coreui/icons'
+import { CNavGroup, CNavItem, CNavTitle, CSidebar, CSidebarBrand, CSidebarNav } from '@coreui/react'
+import { cilHome, cilPuzzle, cilFlower, cilWrapText, cilWc, cilUser, cilEco, cilGlobeAlt } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import { FC } from "react"
 
 const DumbSideabar: FC<{ handleRouter: (route: string) => void }> = ({ handleRouter }) => (
     <CSidebar style={{height: "100vh"}}>
-        {/* <CSidebarBrand>Sidebar Brand</CSidebarBrand> */}
+        <CSidebarBrand>Space Agro</CSidebarBrand>
         <CSidebarNav>
             <CNavTitle>SIDEBAR</CNavTitle>
-            <CNavItem href="#" onClick={() => handleRouter("/admin")}>
+            <CNavItem  onClick={() => handleRouter("/admin")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilHome} />
                 HOME
             </CNavItem>
-            <CNavItem href="#" onClick={() => handleRouter("/admin/products")}>
+            <CNavItem  onClick={() => handleRouter("/admin/products")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilFlower} />
                 PRODUCTS
             </CNavItem>
-            <CNavItem href="#" onClick={() => handleRouter("/admin/orders")}>
+            <CNavItem  onClick={() => handleRouter("/admin/orders")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilWrapText} />
                 ORDERS
             </CNavItem>
-            <CNavItem href="#" onClick={() => handleRouter("/admin/consulation")}>
+            <CNavItem  onClick={() => handleRouter("/admin/consulation")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilWc} />
                 CONSULTATION
             </CNavItem>
-            <CNavItem href="#" onClick={() => handleRouter("/admin/users")}>
+            <CNavItem onClick={() => handleRouter("/admin/users")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilUser} />
                 USERS
             </CNavItem>
-            <CNavItem href="#" onClick={() => handleRouter("/admin/plants")}>
+            <CNavItem  onClick={() => handleRouter("/admin/plants")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilEco} />
                 PLANTS
+            </CNavItem>
+            <CNavItem  onClick={() => handleRouter("/admin/map")} href="#">
+                <CIcon customClassName="nav-icon" icon={cilGlobeAlt} />
+                MAP
             </CNavItem>
             <CNavGroup toggler="Plants">
                 <CNavItem href="#" onClick={() => handleRouter("/admin/plants-category")}>
