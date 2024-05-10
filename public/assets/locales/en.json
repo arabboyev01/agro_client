@@ -30,7 +30,7 @@
         "phone_number": "Enter your phone number"
     },
     "sidebar": {
-        "sidebar": "Sidebar",
+        "side": "Sidebar",
         "home": "HOME",
         "orders": "Orders",
         "consultants": "Consultants",

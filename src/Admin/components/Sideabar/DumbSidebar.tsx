@@ -1,4 +1,4 @@
-import { CNavGroup, CNavItem, CNavTitle, CSidebar, CSidebarBrand, CSidebarNav } from '@coreui/react'
+import { CNavGroup, CNavItem, CNavTitle, CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import { cilHome, cilPuzzle, cilFlower, cilWrapText, cilWc, cilUser, cilEco, cilGlobeAlt } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import { FC } from "react"
@@ -8,7 +8,7 @@ const DumbSideabar: FC<{ handleRouter: (route: string) => void, l: TFunction<"tr
     <CSidebar style={{height: "100vh"}}>
         <CSidebarBrand>Space Agro</CSidebarBrand>
         <CSidebarNav>
-            <CNavTitle style={{ textTransform: "uppercase"}}>{l("sidebar.sidebar")}</CNavTitle>
+            {/* <CNavTitle style={{ textTransform: "uppercase"}}>{l("sidebar.side")}</CNavTitle> */}
             <CNavItem style={{ textTransform: "uppercase" }}  onClick={() => handleRouter("/admin")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilHome} />
                 {l("sidebar.home")}
@@ -37,7 +37,7 @@ const DumbSideabar: FC<{ handleRouter: (route: string) => void, l: TFunction<"tr
                 <CIcon customClassName="nav-icon" icon={cilGlobeAlt} />
                 {l("sidebar.map")}
             </CNavItem>
-            <CNavGroup toggler={l("sidebar.sidebar")}>
+            <CNavGroup toggler={l("sidebar.side")}>
                 <CNavItem style={{ textTransform: "uppercase" }}  href="#" onClick={() => handleRouter("/admin/plants-category")}>
                     <CIcon customClassName="nav-icon" icon={cilPuzzle} /> {l("sidebar.category")}
                 </CNavItem>
@@ -46,8 +46,7 @@ const DumbSideabar: FC<{ handleRouter: (route: string) => void, l: TFunction<"tr
                 </CNavItem>
             </CNavGroup>
         </CSidebarNav>
-        {/* <CSidebarToggler /> */}
+        <CSidebarToggler />
     </CSidebar>
-);
-
-export default DumbSideabar;
+)
+export default DumbSideabar
