@@ -17,7 +17,6 @@ const PlantTypeEdit = () => {
         name_uz: '',
         name_ru: '',
         name_en: '',
-        plantType: ''
     });
 
     const handleImage = (e: any) => setImage(e?.target?.files[0])
@@ -29,8 +28,7 @@ const PlantTypeEdit = () => {
                 setInitialValues({
                     name_uz: data.data.name_uz,
                     name_ru: data.data.name_ru,
-                    name_en: data.data.name_en,
-                    plantType: data.data.plantType,
+                    name_en: data.data.name_en
                 })
             })
                 .catch(err => console.log(err))
@@ -50,7 +48,6 @@ const PlantTypeEdit = () => {
         formData.append("name_ru", values.name_ru)
         formData.append("name_en", values.name_en)
         formData.append("image", image)
-        formData.append("plantType", values.plantType)
 
         api.putData(`plants-category/${paramId}`, formData).then(data => {
             if (data.success) {
@@ -112,19 +109,6 @@ const PlantTypeEdit = () => {
                                         variant="filled"
                                         type="text"
                                         label="Plant name en"
-                                        {...input}
-                                        error={meta.touched && meta.error}
-                                        helperText={meta.touched && meta.error}
-                                    />
-                                )}
-                            </Field>
-                            <Field name="plantType">
-                                {({ input, meta }) => (
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="What is Plant type name"
                                         {...input}
                                         error={meta.touched && meta.error}
                                         helperText={meta.touched && meta.error}

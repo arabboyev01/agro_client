@@ -47,8 +47,8 @@ const PlantTypeAdd = () => {
         formData.append("name_uz", values.name_uz)
         formData.append("name_ru", values.name_ru)
         formData.append("name_en", values.name_en)
-        formData.append("image", image)
         formData.append("categoryId", categoryId)
+        formData.append("image", image)
 
         api.postWithToken("plants-types", formData).then(data => {
             if (data.success) {
@@ -95,7 +95,7 @@ const PlantTypeAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name uz"
+                                label="Type name uz"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name_uz}
@@ -108,7 +108,7 @@ const PlantTypeAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name ru"
+                                label="Type name ru"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name_ru}
@@ -121,7 +121,7 @@ const PlantTypeAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name en"
+                                label="Type name en"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name_en}
@@ -133,7 +133,7 @@ const PlantTypeAdd = () => {
                             <FormControl fullWidth
                                 sx={{ gridColumn: "span 2" }}
                             >
-                                <InputLabel id="demo-simple-select-label">Plant Categories</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Choose category</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"

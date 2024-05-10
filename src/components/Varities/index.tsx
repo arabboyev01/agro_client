@@ -3,13 +3,10 @@ import DumbVarities from "./DUmbVarities"
 import { Language } from "@/hooks/language"
 import { useQuery } from "react-query"
 import { getData } from "@/api/custom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { api } from "@/api"
 
 const VaritiesComponent = () => {
-
-    const { data: categories } = useQuery('plants-category', () => getData('plants-category'))
-    const { data: types } = useQuery('plants-type', () => getData('plants-types'))
 
     const router = useRouter()
     const { lang, l } = Language()
@@ -18,13 +15,24 @@ const VaritiesComponent = () => {
     const [category, setCategory] = useState<any>('')
     const [data, setData] = useState(null)
 
-    const handleRoute = (route: string) => router.push(route)
+    
+    const { data: categories } = useQuery('plants-category', () => getData('plants-category'))
 
+    const { data: types, refetch } = useQuery('types-id', () => getData(`types-id/${category?.id}`), {
+        enabled: !!category?.id,
+    })
+
+    useEffect(() => {
+        if (category?.id) refetch()
+    }, [category?.id, refetch])
+
+    const handleRoute = (route: string) => router.push(route)
+    
     const handleData = () => {
         if (category && type) {
             api.getData(`varity-details?type=${type?.id}&category=${category?.id}`)
-                .then((data) => setData(data.data))
-                .catch(err => console.log(err))
+            .then((data) => setData(data.data))
+            .catch(err => console.log(err))
         }
     }
     

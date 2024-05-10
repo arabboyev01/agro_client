@@ -9,6 +9,7 @@ export const getMethod = async ({ queryKey }: { queryKey: string[] }) => {
 }
 export const getData = async (endpoint: string) => {
       const mainUrl = `${MAIN_URL}/${endpoint}`
+      console.log(mainUrl)
 
       const response: any = await fetch(mainUrl)
       const res = await response.json()

@@ -6,7 +6,7 @@ const DumbGetMap: FC<any> = ({ navigate, navigateTo}) => (
   <Fragment>
     <ComponentHeader title="Add Map Information" onClick={() => navigate && navigate("/admin/map/add")} />
     <div style={{ marginTop: "20px"}}>
-      <MapUI height={80}/>
+      {/* <MapUI height={80} MapContent={<h1>Hello world</h1>}/> */}
     </div>
   </Fragment>
 )

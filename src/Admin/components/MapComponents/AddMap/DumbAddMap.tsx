@@ -1,5 +1,5 @@
 import { Box, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material"
-import { Formik } from "formik"
+import { Formik, useFormik } from "formik"
 import * as yup from "yup"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { CButton, CSpinner } from "@coreui/react"
@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { MAIN_URL } from "@/config"
 import Router from "@/hooks/router"
 import MapUI from "../Map"
+import { PointComponent } from "../Point"
 
 type ProductType = {
     id: number
@@ -17,137 +18,198 @@ type ProductType = {
     name_ru: string
     name_en: string
 }
+
 const AddMap = () => {
 
     const isNonMobile = useMediaQuery("(min-width:600px)")
 
-    const [product, setProduct] = useState<any>(null)
+    const [category, setCategory] = useState<any>(null)
     const [loader, setLoader] = useState(false)
     const [data, setData] = useState([])
+    const [inputValue, seInputValue] = useState("")
+
+    const [formData, setFormData] = useState({});
+    const [isValueVisible, setIsValueVisible] = useState(false)
+
+    const [selectedProducts, setSelectedProducts] = useState<number[] | any>([]);
+
+    const handleChange = (event: React.ChangeEvent<any> | any) => {
+        setSelectedProducts(event.target.value as number[])
+    }
+
+    const [typeData, setTypeData] = useState([])
+
 
     const fetchData = useCallback(() => {
-        fetch(`${MAIN_URL}/products`).then(res => res.json())
+        fetch(`${MAIN_URL}/plants-category`).then(res => res.json())
             .then((data) => setData(data.data))
     }, [])
+
+    const fetchType = useCallback(() => {
+        fetch(`${MAIN_URL}/types-id/${category}`).then(res => res.json())
+            .then((data) => setTypeData(data.data))
+    }, [category])
 
     useEffect(() => {
         fetchData()
     }, [fetchData])
 
+    useEffect(() => {
+        fetchType()
+    }, [fetchType])
+
     const { l } = Language()
     const { navigate } = Router()
 
-    const handleFormSubmit = (values: { address: string, phone: string }) => {
-        setLoader(true)
-        const payload = {
-            address: values.address,
-            phone: values.phone,
-            productId: product
-        }
+    console.log(typeData)
 
-        if (values.address && values.phone && product) {
-            api.postData('orders', payload).then((data) => {
-                if (data.success) {
-                    toast.success("Your order has sent!", {
+
+    const formik: any = useFormik({
+        initialValues: {
+            address: "",
+            phone: "+998"
+        },
+        onSubmit: (values: any) => {
+            setLoader(true)
+            const payload = {
+                address: values.address,
+                phone: values.phone,
+                productId: category
+            }
+
+            if (values.address && values.phone && category) {
+                api.postData('orders', payload).then((data) => {
+                    if (data.success) {
+                        toast.success("Your order has sent!", {
+                            theme: "dark"
+                        })
+                        setLoader(false)
+                        navigate("/admin/orders")
+                    } else {
+                        toast.error(data.message, {
+                            theme: "dark"
+                        })
+                        setLoader(false)
+                    }
+                }).catch((err: any) => {
+                    toast.error(err.message, {
                         theme: "dark"
                     })
                     setLoader(false)
-                    navigate("/admin/orders")
-                } else {
-                    toast.error(data.message, {
-                        theme: "dark"
-                    })
-                    setLoader(false)
-                }
-            }).catch((err: any) => {
-                toast.error(err.message, {
-                    theme: "dark"
                 })
-                setLoader(false)
-            })
-        }
-    }
+            }
+        },
+    });
+
+    console.log(category)
+
+    useEffect(() => {
+        seInputValue(formik.values.address);
+    }, [formik.values.address]);
 
     return (
         <Fragment>
-            <MapUI height={50}/>
+            <MapUI height={47} MapContent={PointComponent} searchValue={inputValue} />
             <Box m="20px">
-                <Formik
-                    onSubmit={handleFormSubmit}
-                    initialValues={initialValues}
-                    validationSchema={checkoutSchema}
-                >
-                    {({
-                        values,
-                        errors,
-                        touched,
-                        handleBlur,
-                        handleChange,
-                        handleSubmit,
-                    }) => (
-                        <form onSubmit={handleSubmit}>
-                            <Box
-                                display="grid"
-                                gap="30px"
-                                gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-                                sx={{
-                                    "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                <form onSubmit={formik.handleSubmit}>
+                    <Box
+                        display="grid"
+                        gap="30px"
+                        gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                        sx={{
+                            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                        }}
+                    >
+                        <TextField
+                            fullWidth
+                            variant="filled"
+                            type="text"
+                            label="Enter the address"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.address}
+                            name="address"
+                            error={!!formik.touched.address && !!formik.errors.address}
+                            helperText={formik.touched.address && formik.errors.address}
+                            sx={{ gridColumn: "span 4" }}
+                        />
+
+                        <FormControl fullWidth
+                            sx={{ gridColumn: "span 2" }}
+                        >
+                            <InputLabel id="demo-simple-select-label">Choose a category</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={category}
+                                label="Plant Categories"
+                                onChange={(e) => setCategory(e.target.value)}
+                                name="categoryId"
+                            >
+                                {data.map((item: ProductType) => {
+                                    const name: string = item[`name_${l}` as keyof ProductType] as string
+                                    return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                })}
+                            </Select>
+                        </FormControl>
+                        <FormControl fullWidth sx={{ gridColumn: "span 2" }}>
+                            <InputLabel id="demo-multiple-select-label">Choose types</InputLabel>
+                            <Select
+                                labelId="demo-multiple-select-label"
+                                id="demo-multiple-select"
+                                multiple
+                                value={selectedProducts}
+                                onChange={handleChange}
+                                renderValue={(selected) => {
+                                    return (selected as number[]).map((productId) => {
+                                        const selectedProduct: any = data.find((item: any) => item.id === productId);
+                                        return selectedProduct ? selectedProduct.name : '';
+                                    }).join(', ');
                                 }}
                             >
-                                <TextField
-                                    fullWidth
-                                    variant="filled"
-                                    type="text"
-                                    label="Enter the address"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.address}
-                                    name="address"
-                                    error={!!touched.address && !!errors.address}
-                                    helperText={touched.address && errors.address}
-                                    sx={{ gridColumn: "span 2" }}
-                                />
-                                <TextField
-                                    fullWidth
-                                    variant="filled"
-                                    type="text"
-                                    label="Customer phone number"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.phone}
-                                    name="phone"
-                                    error={!!touched.phone && !!errors.phone}
-                                    helperText={touched.phone && errors.phone}
-                                    sx={{ gridColumn: "span 2" }}
-                                />
-                                <FormControl fullWidth
-                                    sx={{ gridColumn: "span 2" }}
-                                >
-                                    <InputLabel id="demo-simple-select-label">Choose a products</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={product?.id}
-                                        label="Plant Categories"
-                                        onChange={(e) => setProduct(e.target.value)}
-                                        name="categoryId"
-                                    >
-                                        {data.map((item: ProductType) => {
-                                            const name: string = item[`name_${l}` as keyof ProductType] as string
-                                            return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
-                                        })}
-                                    </Select>
-                                </FormControl>
-                            </Box>
-                            <Box display="flex" justifyContent="end" mt="20px">
-                                <CButton color="primary" type="submit" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                    Create new Order
-                                    {loader && <CSpinner color="light" style={{ width: '15px', height: "15px" }} />}
-                                </CButton>
-                            </Box>
-                        </form>
-                    )}
-                </Formik>
+                                {typeData?.map((item: ProductType) => {
+                                    const name: string = item[`name_${l}` as keyof ProductType] as string;
+                                    return <MenuItem key={item.id} value={item.id}>{name}</MenuItem>;
+                                })}
+                            </Select>
+                        </FormControl>
+                        <TextField
+                            fullWidth
+                            variant="filled"
+                            type="text"
+                            label="Soil Key"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.address}
+                            name="soil_key"
+                            error={!!formik.touched.address && !!formik.errors.address}
+                            helperText={formik.touched.address && formik.errors.address}
+                            sx={{ gridColumn: "span 2" }}
+                        />
+                        <TextField
+                            fullWidth
+                            variant="filled"
+                            type="text"
+                            label="Soil Value"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.address}
+                            name="soil_value"
+                            error={!!formik.touched.address && !!formik.errors.address}
+                            helperText={formik.touched.address && formik.errors.address}
+                            sx={{ gridColumn: "span 2" }}
+                        />
+                        <CButton color="primary" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", width: "100px" }}>
+                            Add
+                        </CButton>
+                    </Box>
+                    <Box display="flex" justifyContent="end" mt="20px">
+                        <CButton color="primary" type="submit" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                            Create new Map
+                            {loader && <CSpinner color="light" style={{ width: '15px', height: "15px" }} />}
+                        </CButton>
+                    </Box>
+                </form>
             </Box>
         </Fragment>
     )
@@ -156,10 +218,6 @@ const AddMap = () => {
 const checkoutSchema = yup.object().shape({
     address: yup.string().required("required"),
     phone: yup.string().required("required"),
-});
-const initialValues = {
-    address: "",
-    phone: "+998"
-}
+})
 
 export default AddMap;

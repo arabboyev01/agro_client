@@ -82,3 +82,9 @@ export interface PlantType {
     image: string
     categoryId: number
 }
+export interface MyContentProps {
+    lat?: number;
+    lng?: number;
+    isSelected: boolean;
+    searchValue?: string
+}

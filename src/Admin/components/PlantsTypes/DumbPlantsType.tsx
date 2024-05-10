@@ -6,7 +6,7 @@ import { dataSet, plantsTypeColumns } from "./data"
 
 const DumbPlantsType: FC<PlantTypeProp<any>> = ({ navigate, data, navigateTo }) => (
     <Fragment>
-        <ComponentHeader title="Add Plant Category" onClick={() => navigate && navigate("/admin/plants-type/add")} />
+        <ComponentHeader title="Add Type" onClick={() => navigate && navigate("/admin/plants-type/add")} />
         <TableComponent user={dataSet(data)} column={plantsTypeColumns} navigateTo={navigateTo}/>
     </Fragment>
 )

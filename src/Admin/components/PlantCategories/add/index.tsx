@@ -26,7 +26,6 @@ const PlantCategoryAdd = () => {
         formData.append("name_ru", values.name_ru)
         formData.append("name_en", values.name_en)
         formData.append("image", image)
-        formData.append("plantType", values.plantType)
 
         api.postWithToken("plants-category", formData).then(data => {
             if (data.success) {
@@ -74,7 +73,7 @@ const PlantCategoryAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name uz"
+                                label="Category name uz"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name_uz}
@@ -87,7 +86,7 @@ const PlantCategoryAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name ru"
+                                label="Category name ru"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name_ru}
@@ -100,7 +99,7 @@ const PlantCategoryAdd = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Plant name en"
+                                label="Category name en"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name_en}
@@ -109,19 +108,7 @@ const PlantCategoryAdd = () => {
                                 helperText={touched.name_en && errors.name_en}
                                 sx={{ gridColumn: "span 2" }}
                             />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="What is Plant type name"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.plantType}
-                                name="plantType"
-                                error={!!touched.plantType && !!errors.plantType}
-                                helperText={touched.plantType && errors.plantType}
-                                sx={{ gridColumn: "span 2" }}
-                            />
+                          
                             <ImageLabel htmlFor="image">
                                 Choose an image
                                 <TextField
@@ -156,13 +143,11 @@ const checkoutSchema = yup.object().shape({
     name_uz: yup.string().required("required"),
     name_ru: yup.string().required("required"),
     name_en: yup.string().required("required"),
-    plantType: yup.string().required("required"),
 })
 const initialValues = {
     name_uz: "",
     name_ru: "",
     name_en: "",
-    plantType: "",
 }
 
 export default PlantCategoryAdd
