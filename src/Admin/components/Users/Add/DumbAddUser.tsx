@@ -16,8 +16,6 @@ const AddUser = () => {
     const [loader, setLoader] = useState(false)
 
     const handleFormSubmit = (values: { email: string, password: string}) => {
-       
-
         api.postData("user", values).then((data) => {
             if (data.success) {
                 toast.success("User Created", {
