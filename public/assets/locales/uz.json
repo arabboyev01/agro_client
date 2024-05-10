@@ -1,32 +1,44 @@
 {
-    "home": {
-        "title": "AGRO",
-        "seeds": "URUG'",
-        "text": "Agro olam revolutsiyasi sari !",
-        "sub": "Biz sizning qishloq xo'jaligi korxonangiz ehtiyojlari uchun tovarlarga katta chegirmalarni topish uchun qulay va bepul vositani yaratdik.",
-        "access": "So'rov yarating",
-        "magazin": "Nav va duragaylar sotib olish",
-        "magazin1": "Qishloq xo'jaligi matahassislari bilan bog'lanish",
-        "magazin2": "Nav va duragaylar haqida",
-        "search": "Qidirsih"
-    },
-    "call": "Qo'ngiroq qilish",
-    "message": "Xabar yo'llash",
-    "login": "Kirish",
-    "seeds": {
-        "search": "Qidirish"
-    },
-    "select_type": "Turni tanlang",
-    "select_plant": "Kategoriya tanlang",
-    "varity_title": "Navining xarakteristikasi",
-    "order": {
-        "send": "Jo'natish",
-        "title": "Aloqa ma'lumotlarini",
-        "name": "Ism familiyangiz",
-        "phone": "Telefon raqamingiz",
-        "cancel": "Qaytish",
-        "desc": "Siz iste'mol qilishni yoqtiradigan mahsulotga buyurtma berishingiz mumkin, buyurtmani topshirganingizdan so'ng, bizning guruh a'zomiz siz bilan bog'lanadi!",
-        "full_name": "To'liq ismingizni kiriting",
-        "phone_number": "Telefon raqamingizni kiriting"
-    }
+  "home": {
+    "title": "AGRO",
+    "seeds": "URUG'",
+    "text": "Agro olam revolutsiyasi sari !",
+    "sub": "Biz sizning qishloq xo'jaligi korxonangiz ehtiyojlari uchun tovarlarga katta chegirmalarni topish uchun qulay va bepul vositani yaratdik.",
+    "access": "So'rov yarating",
+    "magazin": "Nav va duragaylar sotib olish",
+    "magazin1": "Qishloq xo'jaligi matahassislari bilan bog'lanish",
+    "magazin2": "Nav va duragaylar haqida",
+    "search": "Qidirsih"
+  },
+  "call": "Qo'ngiroq qilish",
+  "message": "Xabar yo'llash",
+  "login": "Kirish",
+  "seeds": {
+    "search": "Qidirish"
+  },
+  "select_type": "Turni tanlang",
+  "select_plant": "Kategoriya tanlang",
+  "varity_title": "Navining xarakteristikasi",
+  "order": {
+    "send": "Jo'natish",
+    "title": "Aloqa ma'lumotlarini",
+    "name": "Ism familiyangiz",
+    "phone": "Telefon raqamingiz",
+    "cancel": "Qaytish",
+    "desc": "Siz iste'mol qilishni yoqtiradigan mahsulotga buyurtma berishingiz mumkin, buyurtmani topshirganingizdan so'ng, bizning guruh a'zomiz siz bilan bog'lanadi!",
+    "full_name": "To'liq ismingizni kiriting",
+    "phone_number": "Telefon raqamingizni kiriting"
+  },
+  "sidebar": {
+    "sidebar": "Yon panel",
+    "home": "bosh sahifa",
+    "orders": "Buyurtmalar",
+    "consultants": "Maslahatchilar",
+    "users": "Foydalanuvchilar",
+    "plants": "O'simliklar",
+    "map": "Xarita",
+    "category": "Kategoriya",
+    "type": "Turi",
+    "products": "mahsulotlar"
+  }
 }

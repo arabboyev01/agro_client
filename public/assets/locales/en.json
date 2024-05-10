@@ -28,5 +28,17 @@
         "desc": "You can order product that you like to eat, after you submit your order, our a team member will contact you !",
         "full_name": "Enter your full name",
         "phone_number": "Enter your phone number"
+    },
+    "sidebar": {
+        "sidebar": "Sidebar",
+        "home": "HOME",
+        "orders": "Orders",
+        "consultants": "Consultants",
+        "users": "Users",
+        "plants": "Plants",
+        "map": "Map",
+        "category": "Category",
+        "type": "Type",
+        "products": "Products" 
     }
 }

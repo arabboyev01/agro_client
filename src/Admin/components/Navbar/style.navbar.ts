@@ -14,3 +14,9 @@ export const Title = styled.h1`
  font-weight: 700;
  text-transform: uppercase;
 `
+export const Lan = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+`
