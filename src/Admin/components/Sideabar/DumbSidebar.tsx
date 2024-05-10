@@ -22,7 +22,7 @@ const DumbSideabar: FC<{ handleRouter: (route: string) => void }> = ({ handleRou
             </CNavItem>
             <CNavItem  onClick={() => handleRouter("/admin/consulation")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilWc} />
-                CONSULTATION
+                CONSULTANTS
             </CNavItem>
             <CNavItem onClick={() => handleRouter("/admin/users")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilUser} />

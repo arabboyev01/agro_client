@@ -5,7 +5,7 @@ import Navbar from '../Navbar'
 
 const AdminLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <div className="c-app">
+    <div className="c-app" style={{ position: "fixed", width: "100%", height: "100vh" }}>
       <div className="c-wrapper">
         <div className="c-sidebar" id="sidebar">
           <SIdebarComponent />
@@ -16,7 +16,7 @@ const AdminLayout: FC<{ children: ReactNode }> = ({ children }) => {
           </header>
           <div className="c-body">
             <main className="c-main">
-              <CContainer fluid>
+              <CContainer fluid style={{ maxHeight: "90vh", overflow: "auto" }}>
                 {children}
               </CContainer>
             </main>
