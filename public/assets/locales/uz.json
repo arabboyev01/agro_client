@@ -31,7 +31,7 @@
   },
   "sidebar": {
     "side": "Yon panel",
-    "home": "bosh sahifa",
+    "home": "Bosh Sahifa",
     "orders": "Buyurtmalar",
     "consultants": "Maslahatchilar",
     "users": "Foydalanuvchilar",
@@ -39,6 +39,6 @@
     "map": "Xarita",
     "category": "Kategoriya",
     "type": "Turi",
-    "products": "mahsulotlar"
+    "products": "Mahsulotlar"
   }
 }

@@ -9,39 +9,39 @@ const DumbSideabar: FC<{ handleRouter: (route: string) => void, l: TFunction<"tr
         <CSidebarBrand>Space Agro</CSidebarBrand>
         <CSidebarNav>
             {/* <CNavTitle style={{ textTransform: "uppercase"}}>{l("sidebar.side")}</CNavTitle> */}
-            <CNavItem style={{ textTransform: "uppercase" }}  onClick={() => handleRouter("/admin")} href="#">
+            <CNavItem  onClick={() => handleRouter("/admin")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilHome} />
                 {l("sidebar.home")}
             </CNavItem>
-            <CNavItem style={{ textTransform: "uppercase" }} onClick={() => handleRouter("/admin/products")} href="#">
+            <CNavItem onClick={() => handleRouter("/admin/products")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilFlower} />
                 {l("sidebar.products")}
             </CNavItem>
-            <CNavItem style={{ textTransform: "uppercase" }} onClick={() => handleRouter("/admin/orders")} href="#">
+            <CNavItem onClick={() => handleRouter("/admin/orders")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilWrapText} />
                 {l("sidebar.orders")}
             </CNavItem>
-            <CNavItem style={{ textTransform: "uppercase" }} onClick={() => handleRouter("/admin/consulation")} href="#">
+            <CNavItem onClick={() => handleRouter("/admin/consulation")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilWc} />
                 {l("sidebar.consultants")}
             </CNavItem>
-            <CNavItem style={{ textTransform: "uppercase" }} onClick={() => handleRouter("/admin/users")} href="#">
+            <CNavItem onClick={() => handleRouter("/admin/users")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilUser} />
                 {l("sidebar.users")}
             </CNavItem>
-            <CNavItem style={{ textTransform: "uppercase" }} onClick={() => handleRouter("/admin/plants")} href="#">
+            <CNavItem onClick={() => handleRouter("/admin/plants")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilEco} />
                 {l("sidebar.plants")}
             </CNavItem>
-            <CNavItem style={{ textTransform: "uppercase" }} onClick={() => handleRouter("/admin/map")} href="#">
+            <CNavItem onClick={() => handleRouter("/admin/map")} href="#">
                 <CIcon customClassName="nav-icon" icon={cilGlobeAlt} />
                 {l("sidebar.map")}
             </CNavItem>
             <CNavGroup toggler={l("sidebar.side")}>
-                <CNavItem style={{ textTransform: "uppercase" }}  href="#" onClick={() => handleRouter("/admin/plants-category")}>
+                <CNavItem  href="#" onClick={() => handleRouter("/admin/plants-category")}>
                     <CIcon customClassName="nav-icon" icon={cilPuzzle} /> {l("sidebar.category")}
                 </CNavItem>
-                <CNavItem style={{ textTransform: "uppercase" }} href="#" onClick={() => handleRouter("/admin/plants-type")}>
+                <CNavItem href="#" onClick={() => handleRouter("/admin/plants-type")}>
                     <CIcon customClassName="nav-icon" icon={cilPuzzle} /> {l("sidebar.type")}
                 </CNavItem>
             </CNavGroup>
