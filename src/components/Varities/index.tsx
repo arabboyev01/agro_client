@@ -9,7 +9,7 @@ import { api } from "@/api"
 const VaritiesComponent = () => {
 
     const router = useRouter()
-    const { lang, l } = Language()
+    const { lang, l } = Language("home")
 
     const [type, setType] = useState<any>('')
     const [category, setCategory] = useState<any>('')

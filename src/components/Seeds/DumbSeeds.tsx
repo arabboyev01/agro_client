@@ -19,7 +19,7 @@ interface Props {
 const DumbSeeds: FC<Props> = ({ hover, setIsHovered, open, setOpen, data, handleSearch, lang, l }) => (
     <S.StyleSeeds>
         <S.SeachInput>
-            <S.Input placeholder={lang('seeds.search')} onChange={handleSearch} />
+            <S.Input placeholder={lang('search')} onChange={handleSearch} />
             <SearchIcon />
         </S.SeachInput>
         <S.SeedsContent>

@@ -21,7 +21,7 @@ const SeedsComponent = () => {
     }, [fetchData])
 
 
-    const { lang, l } = Language()
+    const { lang, l } = Language("seeds")
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setTimeout(() => {

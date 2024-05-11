@@ -1,11 +1,11 @@
 import { Language } from "@/hooks/language"
 import DumbHomePage from "./DumbHome"
 import { useRouter } from "next/router"
+import { useScopedI18n } from "@/features/locales"
 
 const HomeComponent = () => {
     const router = useRouter()
-    const { lang } = Language()
-
+    const { lang } = Language("home")
     const handleRoute = (route: string) => router.push(route)
 
     const callButton = () => {

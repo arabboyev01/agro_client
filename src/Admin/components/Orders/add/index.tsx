@@ -32,7 +32,7 @@ const OrderAdd = () => {
         fetchData()
     }, [fetchData])
 
-    const { l } = Language()
+    const { l } = Language("order")
     const { navigate } = Router()
 
     const handleFormSubmit = (values: {customerName: string, phone: string }) => {

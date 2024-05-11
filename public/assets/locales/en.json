@@ -1,44 +1,48 @@
 {
-    "home": {
-        "title": "AGRO",
-        "seeds": "SEEDS",
-        "text": "Towards a revolution in the agro world !",
-        "sub": "We have created a convenient and free tool for finding great deals on goods for the needs of your agricultural enterprise.",
-        "access": "Create a request",
-        "magazin": "Buying varieties and hybrids",
-        "magazin1": "Contact with agricultural specialists",
-        "magazin2": "About varieties and hybrids",
-        "search": "Search"
-    },
+  "home": {
+    "title": "AGRO",
+    "seeds": "SEEDS",
+    "text": "Towards a revolution in the agro world !",
+    "sub": "We have created a convenient and free tool for finding great deals on goods for the needs of your agricultural enterprise.",
+    "access": "Create a request",
+    "magazin": "Buying varieties and hybrids",
+    "magazin1": "Contact with agricultural specialists",
+    "magazin2": "About varieties and hybrids",
+    "search": "Search",
     "call": "Call us",
     "message": "Message",
     "login": "Login",
-    "seeds": {
-        "search": "Search here"
-    },
     "select_type": "Select type",
     "select_plant": "Select catgeory",
-    "varity_title": "Characteristics of the variety",
-    "order": {
-        "send": "Send",
-        "title": "Contact Information",
-        "name": "Full Name",
-        "phone": "Phone number",
-        "cancel": "Cancel",
-        "desc": "You can order product that you like to eat, after you submit your order, our a team member will contact you !",
-        "full_name": "Enter your full name",
-        "phone_number": "Enter your phone number"
-    },
-    "sidebar": {
-        "side": "Sidebar",
-        "home": "Home",
-        "orders": "Orders",
-        "consultants": "Consultants",
-        "users": "Users",
-        "plants": "Plants",
-        "map": "Map",
-        "category": "Category",
-        "type": "Type",
-        "products": "Products" 
-    }
+    "varity_title": "Characteristics of the variety"
+  },
+  "seeds": {
+    "search": "Search here"
+  },
+  "order": {
+    "send": "Send",
+    "title": "Contact Information",
+    "name": "Full Name",
+    "phone": "Phone number",
+    "cancel": "Cancel",
+    "desc": "You can order product that you like to eat, after you submit your order, our a team member will contact you !",
+    "full_name": "Enter your full name",
+    "phone_number": "Enter your phone number"
+  },
+  "sidebar": {
+    "side": "Sidebar",
+    "home": "Home",
+    "orders": "Orders",
+    "consultants": "Consultants",
+    "users": "Users",
+    "plants": "Plants",
+    "map": "Map",
+    "category": "Category",
+    "type": "Type",
+    "products": "Products"
+  },
+  "plants": {},
+  "notification": {
+    "order": "Your order has sent !"
+  }
 }

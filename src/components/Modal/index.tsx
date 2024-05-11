@@ -18,7 +18,8 @@ interface ModalComponentProps {
 const ModalComponent: FC<ModalComponentProps> = ({ open, setOpen, data }) => {
 
     const [loader, setLoader] = useState(false)
-    const { lang } = Language()
+    const { lang } = Language("order")
+    const { lang: notification } = Language("notification")
 
     const onSubmit = (values: { name: string, phone: string }) => {
         setLoader(true)
@@ -31,7 +32,7 @@ const ModalComponent: FC<ModalComponentProps> = ({ open, setOpen, data }) => {
         if (values.name && values.phone) {
             api.postData('orders', payload).then((data) => {
                 if (data.success) {
-                    toast.success("Your order has sent!", {
+                    toast.success(`${notification("order")}`, {
                         theme: "dark"
                     })
                     setOpen(false)
@@ -81,8 +82,8 @@ const ModalComponent: FC<ModalComponentProps> = ({ open, setOpen, data }) => {
             <S.ModalComponentContent>
                 <S.HeaderModal>
                     <S.TextWrapper>
-                        <S.ContactName>{lang('order.title')}</S.ContactName>
-                        <S.ModalDesc>{lang('order.desc')}</S.ModalDesc>
+                        <S.ContactName>{lang('title')}</S.ContactName>
+                        <S.ModalDesc>{lang('desc')}</S.ModalDesc>
                     </S.TextWrapper>
 
                     <S.CloseIcon onClick={() => setOpen(false)}>
@@ -97,24 +98,24 @@ const ModalComponent: FC<ModalComponentProps> = ({ open, setOpen, data }) => {
                         <form onSubmit={handleSubmit}>
                             <S.Inputs>
                                 <S.InputForms>
-                                    <S.InputName>{lang('order.name')}:</S.InputName>
+                                    <S.InputName>{lang('name')}:</S.InputName>
                                     <Field name="name">
                                         {({ input }) => (
-                                            <S.Input {...input} placeholder={lang('order.full_name')}/>
+                                            <S.Input {...input} placeholder={lang('full_name')}/>
                                         )}
                                     </Field>
                                 </S.InputForms>
                                 <S.InputForms>
-                                    <S.InputName>{lang('order.phone')}:</S.InputName>
+                                    <S.InputName>{lang('phone')}:</S.InputName>
                                     <Field name="phone">
                                         {({ input, meta }) => (
-                                            <S.Input {...input} type='tel' placeholder={lang('order.phone_number')}/>
+                                            <S.Input {...input} type='tel' placeholder={lang('phone_number')}/>
                                         )}
                                     </Field>
                                 </S.InputForms>
                                 <S.ButtonWrapper>
-                                    <MainButton width={200} height={42.55} text={lang('order.send')} textSize={14} loader={loader} />
-                                    <S.CallButton onClick={() => setOpen(false)}>{lang('order.cancel')}</S.CallButton>
+                                    <MainButton width={200} height={42.55} text={lang('send')} textSize={14} loader={loader} />
+                                    <S.CallButton onClick={() => setOpen(false)}>{lang('cancel')}</S.CallButton>
                                 </S.ButtonWrapper>
                             </S.Inputs>
                         </form>

@@ -5,7 +5,7 @@ import { useQuery } from "react-query"
 
 const ConsultantService = () => {
 
-    const { lang } = Language()
+    const { lang } = Language("consultant")
     const { data } = useQuery('consultant', () => getData('consultant'))
 
     const callButton = (number: string) => window.location.href = `tel:${number}`

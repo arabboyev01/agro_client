@@ -8,17 +8,17 @@
     "magazin": "Nav va duragaylar sotib olish",
     "magazin1": "Qishloq xo'jaligi matahassislari bilan bog'lanish",
     "magazin2": "Nav va duragaylar haqida",
-    "search": "Qidirsih"
+    "search": "Qidirsh",
+    "call": "Qo'ngiroq qilish",
+    "message": "Xabar yo'llash",
+    "login": "Kirish",
+    "select_type": "Turni tanlang",
+    "select_plant": "Kategoriya tanlang",
+    "varity_title": "Navining xarakteristikasi"
   },
-  "call": "Qo'ngiroq qilish",
-  "message": "Xabar yo'llash",
-  "login": "Kirish",
   "seeds": {
     "search": "Qidirish"
   },
-  "select_type": "Turni tanlang",
-  "select_plant": "Kategoriya tanlang",
-  "varity_title": "Navining xarakteristikasi",
   "order": {
     "send": "Jo'natish",
     "title": "Aloqa ma'lumotlarini",
@@ -40,5 +40,9 @@
     "category": "Kategoriya",
     "type": "Turi",
     "products": "Mahsulotlar"
+  },
+  "plants": {},
+  "notification": {
+    "order": "Buyurtmangiz qabul qilindi !"
   }
 }

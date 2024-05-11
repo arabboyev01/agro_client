@@ -16,7 +16,7 @@ const DumbHomePage: FC<Props> = ({ lang, handleRoute, callButton }) => (
                 <S.LeftItems key={id} onClick={() => handleRoute(route)} data-aos="fade-right">
                     <Icon />
                     <S.LeftItemsText>{name}</S.LeftItemsText>
-                    <MainButton width={121} height={30} text={lang('home.access')} textSize={9} />
+                    <MainButton width={121} height={30} text={lang('access')} textSize={9} />
                 </S.LeftItems>
             )}
         </S.LeftContent>
@@ -25,7 +25,7 @@ const DumbHomePage: FC<Props> = ({ lang, handleRoute, callButton }) => (
                 <S.GreenTitle data-aos="fade-right">Space</S.GreenTitle>
                 <S.BlackTitle data-aos="fade-left">Agro</S.BlackTitle>
             </S.MiddleTile>
-            <S.Subtitle>{lang('home.text')}</S.Subtitle>
+            <S.Subtitle>{lang('text')}</S.Subtitle>
             <MainButton width={185} height={45} text={lang('call')} textSize={12} onClick={callButton}/>
 
             <S.MiddleContact>

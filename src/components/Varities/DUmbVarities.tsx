@@ -39,7 +39,7 @@ const DumbVarities: FC<Props> = ({ lang, handleRoute, categories, types, setType
                 <S.LeftItems key={id} onClick={() => handleRoute(route)} data-aos="fade-right">
                     <Icon />
                     <S.LeftItemsText>{name}</S.LeftItemsText>
-                    <MainButton width={121} height={30} text={lang('home.access')} textSize={9} />
+                    <MainButton width={121} height={30} text={lang('access')} textSize={9} />
                 </S.LeftItems>
             )}
         </S.LeftContent>
@@ -48,7 +48,7 @@ const DumbVarities: FC<Props> = ({ lang, handleRoute, categories, types, setType
                 <VarityDropdown data={categories} setValue={setCategory} value={category?.[`name_${l}`]} text={lang('select_type')} l={l} />
                 <VarityDropdown data={types} setValue={setType} value={type?.[`name_${l}`]} text={lang('select_plant')} l={l} />
                 <div>
-                    <MainButton onClick={handleData} width={200} height={50} text={lang('home.search')} />
+                    <MainButton onClick={handleData} width={200} height={50} text={lang('search')} />
                 </div>
             </SS.VaritySelectors>
             <SS.VarietyContent>

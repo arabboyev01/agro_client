@@ -1,0 +1,1 @@
+export type localType = "home" | "seeds" | "order" | "sidebar" | "plants" | "notification"

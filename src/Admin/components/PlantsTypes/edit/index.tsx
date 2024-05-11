@@ -21,7 +21,7 @@ type PlantType = {
 const PlantTypeEdit = () => {
 
     const { navigate, paramId } = Router()
-    const {l} = Language()
+    const {l} = Language("plants")
 
     const isNonMobile = useMediaQuery("(min-width:600px)")
     const [image, setImage] = useState<string | any>("")

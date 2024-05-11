@@ -22,7 +22,7 @@ const ProductEdit = () => {
     const [typeId, setTypeId] = useState('')
     const [loader, setLoader] = useState(false)
 
-    const { l } = Language()
+    const { l } = Language("products")
 
     const [image, setImage] = useState<string | any>("")
     const [initialValues, setInitialValues] = useState(

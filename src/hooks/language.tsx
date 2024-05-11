@@ -1,7 +1,8 @@
-import { TFunction, useTranslation } from "next-i18next"
+import { useCurrentLocale, useScopedI18n } from "@/features/locales"
+import { localType } from "@/features/types"
 
-export const Language = () => {
-    const { t , i18n }: { t: TFunction , i18n: any} = useTranslation()
-    const lang: string = i18n.language;
-    return { lang: t, l: lang}
+export const Language = (path: localType|any) => {
+    const t: any = useScopedI18n(path)
+    const currentLanguage = useCurrentLocale()
+    return { lang: t, l: currentLanguage }
 }

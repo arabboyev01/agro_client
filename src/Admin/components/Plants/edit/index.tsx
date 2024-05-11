@@ -20,7 +20,7 @@ type PlantsType = {
 
 const PlantEdit = () => {
 
-    const { l } = Language()
+    const { l } = Language("plants")
 
     const { navigate, paramId } = Router()
     const [categories, setCategories] = useState([])

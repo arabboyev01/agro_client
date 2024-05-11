@@ -21,7 +21,7 @@ type ProductType = {
 
 const AddMap = () => {
 
-    const { l } = Language()
+    const { l } = Language("home")
     const { navigate } = Router()
 
     const [mapCenter, setMapCenter] = useState<{ lat: number, lng: number }>({ lat: 40.7686, lng: 72.2364 })

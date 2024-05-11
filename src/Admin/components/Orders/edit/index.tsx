@@ -22,7 +22,7 @@ const OrdersEdit = () => {
     const [loader, setLoader] = useState(false)
 
 
-    const { l } = Language()
+    const { l } = Language("order")
 
     const [initialValues, setInitialValues] = useState(
         {

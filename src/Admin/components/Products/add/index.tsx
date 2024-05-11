@@ -25,7 +25,7 @@ const ProductsAdd = () => {
     const [loader, setLoader] = useState(false)
 
     const { navigate } = Router()
-    const { l } = Language()
+    const { l } = Language("products")
 
     const handleFormSubmit = (values: any) => {
         setLoader(true)

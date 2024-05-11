@@ -5,7 +5,7 @@ import Router from "@/hooks/router"
 const SIdebarComponent = () => {
     
     const { navigate } = Router()
-    const { lang } = Language()
+    const { lang } = Language("sidebar")
 
     return <DumbSideabar handleRouter={navigate} l={lang}/>
 }
