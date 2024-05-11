@@ -8,7 +8,7 @@ const DumbNavbar: FC<{ lastPathname: string, lang: string, setLang: (value: stri
     <S.StyleNavbar>
         <S.Title>{lastPathname}</S.Title>
         <S.Lan>
-            <MainDropdown title='ru' data={LanData} value={lang} setValue={setLang} />
+            {/* <MainDropdown title='ru' data={LanData} value={lang} setValue={setLang} /> */}
             <CAvatar color="primary" textColor="white" size="md">A</CAvatar>
         </S.Lan>
     </S.StyleNavbar>
