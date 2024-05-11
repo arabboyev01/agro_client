@@ -39,7 +39,9 @@
     "map": "Карта",
     "category": "Категория",
     "type": "Тип",
-    "products": "Продукты"
+    "products": "Продукты",
+    "region": "Region",
+    "district": "Districts"
   },
   "plants": {},
   "notification": {

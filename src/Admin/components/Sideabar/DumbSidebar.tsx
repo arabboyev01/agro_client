@@ -44,6 +44,12 @@ const DumbSideabar: FC<{ handleRouter: (route: string) => void, l: TFunction<"tr
                 <CNavItem style={{ textTransform: "uppercase" }}  href="#" onClick={() => handleRouter("/admin/plants-type")}>
                     <CIcon customClassName="nav-icon" icon={cilPuzzle} /> {l("type")}
                 </CNavItem>
+                <CNavItem style={{ textTransform: "uppercase" }} href="#" onClick={() => handleRouter("/admin/regions")}>
+                    <CIcon customClassName="nav-icon" icon={cilPuzzle} /> {l("region")}
+                </CNavItem>
+                <CNavItem style={{ textTransform: "uppercase" }} href="#" onClick={() => handleRouter("/admin/districts")}>
+                    <CIcon customClassName="nav-icon" icon={cilPuzzle} /> {l("district")}
+                </CNavItem>
             </CNavGroup>
         </CSidebarNav>
         <CSidebarToggler />

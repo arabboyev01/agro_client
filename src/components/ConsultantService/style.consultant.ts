@@ -60,7 +60,7 @@ export const Buttons = styled.div`
 
 export const MessageButton = styled.button`
   color: #48B760;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   width: 98px;
   height: 32px;
@@ -71,4 +71,5 @@ export const MessageButton = styled.button`
   background-color:  rgba(72, 183, 96, 0.15);
   border: none;
   border-radius: 24px;
+  text-transform: uppercase;
 `

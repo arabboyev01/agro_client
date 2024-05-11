@@ -53,11 +53,11 @@ export const dataSet = (data: OrderType[]) => {
         id,
         customerName,
         customerPhone,
-        avatar: product.image,
-        name_uz: product.name_uz,
-        name_ru: product.name_ru,
-        name_en: product.name_en,
-        price: product.price
+        avatar: product?.image,
+        name_uz: product?.name_uz,
+        name_ru: product?.name_ru,
+        name_en: product?.name_en,
+        price: product?.price
       }
     })
   }

@@ -39,7 +39,9 @@
     "map": "Map",
     "category": "Category",
     "type": "Type",
-    "products": "Products"
+    "products": "Products",
+    "region": "Region",
+    "district": "Districts"
   },
   "plants": {},
   "notification": {

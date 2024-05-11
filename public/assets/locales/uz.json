@@ -39,7 +39,9 @@
     "map": "Xarita",
     "category": "Kategoriya",
     "type": "Turi",
-    "products": "Mahsulotlar"
+    "products": "Mahsulotlar",
+    "region": "Viloyatlar",
+    "district": "Tumanlar"
   },
   "plants": {},
   "notification": {
