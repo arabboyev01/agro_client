@@ -67,6 +67,26 @@ class ApiService {
         }
     }
 
+    async authGet(endpoint: string) {
+        const mainUrl = `${this.mainUrl}/${endpoint}`
+
+        try {
+            const response: any = await fetch(mainUrl, {
+                method: "GET",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `${typeof window !== "undefined" && window.localStorage.getItem("accessToken")}`
+                },
+            })
+
+            const res = await response.json()
+
+            return await res
+        } catch (error: unknown) {
+            console.error(error)
+        }
+    }
+
     async getData(endpoint: string) {
         const mainUrl = `${this.mainUrl}/${endpoint}`
 

@@ -1,6 +1,5 @@
 import { Box, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material"
-import { Formik, useFormik } from "formik"
-import * as yup from "yup"
+import { useFormik } from "formik"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { CButton, CSpinner } from "@coreui/react"
 import { useState, useCallback, useEffect, Fragment } from "react"
@@ -23,34 +22,30 @@ const AddMap = () => {
 
     const { l } = Language("home")
     const { navigate } = Router()
+    const isNonMobile = useMediaQuery("(min-width:600px)")
 
     const [mapCenter, setMapCenter] = useState<{ lat: number, lng: number }>({ lat: 40.7686, lng: 72.2364 })
-
-    const isNonMobile = useMediaQuery("(min-width:600px)")
 
     const [category, setCategory] = useState<any>(null)
     const [loader, setLoader] = useState(false)
     const [data, setData] = useState([])
-    const [inputValue, seInputValue] = useState("")
     const [typeData, setTypeData] = useState([])
     const [selectedProducts, setSelectedProducts] = useState<number[] | any>([])
 
     const [soil_key, setKey_data] = useState("")
     const [soil_value, setKey_value] = useState("")
-    const [soils, setSoils] = useState<{ id: number, key: string; value: string }[]>([])
-    const [soildId, setSoilId] = useState(0)
-
+    const [soils, setSoils] = useState<{ key: string; value: string }[]>([])
+    
     const handleSoilValue = () => {
         if (soil_key && soil_value) {
-            setSoilId(soildId + 1)
             setSoils([...soils, {
-                id: soildId,
                 key: soil_key,
                 value: soil_value
             }])
+            setKey_data("")
+            setKey_value((""))
         }
     }
-
 
     const handleChange = (event: React.ChangeEvent<any> | any) => {
         setSelectedProducts(event.target.value as number[])
@@ -66,6 +61,29 @@ const AddMap = () => {
             .then((data) => setTypeData(data.data))
     }, [category])
 
+    const [regions, setRegions] = useState([])
+    const [regionId, setRegionId] = useState<null | string>(null)
+    const [districts, setDistricts] = useState([])
+    const [districtId, setDistrictId] = useState<null | string>(null)
+
+    const getRegions = useCallback(() => {
+        api.getData('region').then((data) => setRegions(data.data)).catch(err => console.log(err))
+    }, [])
+
+    const getDistrictsByCategoryId = useCallback(() => {
+        if (regionId) {
+            api.authGet(`district-by-region-id/${Number(regionId)}`).then((data) => setDistricts(data.data)).catch(err => console.log(err))
+        }
+    }, [regionId])
+
+    useEffect(() => {
+        getRegions()
+    }, [getRegions])
+
+    useEffect(() => {
+        getDistrictsByCategoryId()
+    }, [getDistrictsByCategoryId])
+
     useEffect(() => {
         fetchData()
     }, [fetchData])
@@ -74,7 +92,6 @@ const AddMap = () => {
         fetchType()
     }, [fetchType])
 
-
     const formik: any = useFormik({
         initialValues: {
             address: "",
@@ -82,6 +99,8 @@ const AddMap = () => {
         onSubmit: (values: any) => {
             setLoader(true)
             const payload = {
+                regionId,
+                districtId,
                 address: values.address,
                 crops: JSON.stringify(selectedProducts),
                 soilsContent: JSON.stringify(soils),
@@ -111,11 +130,7 @@ const AddMap = () => {
                 })
             }
         },
-    });
-
-    useEffect(() => {
-        seInputValue(formik.values.address);
-    }, [formik.values.address])
+    })
 
     useEffect(() => {
         setKey_value(formik.values.soil_value)
@@ -130,7 +145,6 @@ const AddMap = () => {
             <MapUI
                 height={47}
                 MapContent={PointComponent}
-                searchValue={inputValue}
                 mapCenter={mapCenter}
                 setMapCenter={setMapCenter}
             />
@@ -144,11 +158,50 @@ const AddMap = () => {
                             "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
                         }}
                     >
+                        <FormControl fullWidth
+                            sx={{ gridColumn: "span 2" }}
+                        >
+                            <InputLabel id="demo-simple-select-label">Choose a region</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={regionId}
+                                label="Regions"
+                                onChange={(e) => setRegionId(e.target.value)}
+                                name="regions"
+                            >
+                                {regions.map((item: ProductType) => {
+                                    const name: string = item[`name_${l}` as keyof ProductType] as string
+                                    return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                })}
+                            </Select>
+                        </FormControl>
+
+
+                        <FormControl fullWidth
+                            sx={{ gridColumn: "span 2" }}
+                        >
+                            <InputLabel id="demo-simple-select-label">Choose a district</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={districtId}
+                                label="Districts"
+                                onChange={(e) => setDistrictId(e.target.value)}
+                                name="districts"
+                            >
+                                {districts?.map((item: ProductType) => {
+                                    const name: string = item[`name_${l}` as keyof ProductType] as string
+                                    return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                })}
+                            </Select>
+                        </FormControl>
+
                         <TextField
                             fullWidth
                             variant="filled"
                             type="text"
-                            label="Enter the address"
+                            label="Your address"
                             onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
                             value={formik.values.address}
@@ -205,7 +258,7 @@ const AddMap = () => {
                             label="Soil Key"
                             onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
-                            value={formik.values.soil_key}
+                            value={soil_key}
                             name="soil_key"
                             error={!!formik.touched.soil_key && !!formik.errors.soil_key}
                             helperText={formik.touched.soil_key && formik.errors.soil_key}
@@ -218,7 +271,7 @@ const AddMap = () => {
                             label="Soil Value"
                             onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
-                            value={formik.values.soil_value}
+                            value={soil_value}
                             name="soil_value"
                             error={!!formik.touched.soil_value && !!formik.errors.soil_value}
                             helperText={formik.touched.soil_value && formik.errors.soil_value}
