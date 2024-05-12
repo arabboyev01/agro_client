@@ -286,7 +286,7 @@ const AddMap = () => {
                     </Box>
                     <S.AddStyle>
                         {soils.map((item: { value: string, key: string }) =>
-                            <S.Soil>
+                            <S.Soil key={item.key}>
                                 <pre>{item.key}</pre>
                                 <pre>:</pre>
                                 <pre>{item.value} %</pre>
