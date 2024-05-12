@@ -10,6 +10,7 @@ import { MAIN_URL } from "@/config"
 import Router from "@/hooks/router"
 import MapUI from "../Map"
 import { PointComponent } from "../Point"
+import * as S from "./style.add"
 
 type ProductType = {
     id: number
@@ -35,7 +36,7 @@ const AddMap = () => {
     const [soil_key, setKey_data] = useState("")
     const [soil_value, setKey_value] = useState("")
     const [soils, setSoils] = useState<{ key: string; value: string }[]>([])
-    
+
     const handleSoilValue = () => {
         if (soil_key && soil_value) {
             setSoils([...soils, {
@@ -97,7 +98,6 @@ const AddMap = () => {
             address: "",
         },
         onSubmit: (values: any) => {
-            setLoader(true)
             const payload = {
                 regionId,
                 districtId,
@@ -108,7 +108,8 @@ const AddMap = () => {
                 long: JSON.stringify(mapCenter.lng)
             }
 
-            if (values.address && selectedProducts && soils && mapCenter.lat && mapCenter.lng) {
+            if (values.address && selectedProducts && soils && mapCenter.lat && mapCenter.lng, regionId, districtId) {
+                setLoader(true)
                 api.authPost('map', payload).then((data) => {
                     if (data.success) {
                         toast.success("Your map data created!", {
@@ -176,8 +177,6 @@ const AddMap = () => {
                                 })}
                             </Select>
                         </FormControl>
-
-
                         <FormControl fullWidth
                             sx={{ gridColumn: "span 2" }}
                         >
@@ -285,6 +284,15 @@ const AddMap = () => {
                             Add
                         </CButton>
                     </Box>
+                    <S.AddStyle>
+                        {soils.map((item: { value: string, key: string }) =>
+                            <S.Soil>
+                                <pre>{item.key}</pre>
+                                <pre>:</pre>
+                                <pre>{item.value} %</pre>
+                            </S.Soil>
+                        )}
+                    </S.AddStyle>
                     <Box display="flex" justifyContent="end" mt="20px">
                         <CButton color="primary" type="submit" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                             Create new Map
