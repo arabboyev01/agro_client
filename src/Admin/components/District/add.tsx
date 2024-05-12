@@ -1,47 +1,67 @@
-import { Box, TextField } from "@mui/material"
+import { Box, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material"
 import { Formik } from "formik"
 import * as yup from "yup"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { CButton, CSpinner } from "@coreui/react"
-import { useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useState } from "react"
 import { api } from "@/api"
-import Router from "@/hooks/router"
 import { toast } from "react-toastify"
+import Router from "@/hooks/router"
+import { Language } from "@/hooks/language"
 
-const RegionsAddComponent = () => {
-    const isNonMobile = useMediaQuery("(min-width:600px)")
-    const [loader, setLoader] = useState(false)
+type regionType = {
+    name_uz: string
+    name_ru: string
+    name_en: string
+    id: number
+}
+
+const DistrictAdd = () => {
 
     const { navigate } = Router()
+    const { l } = Language("plants")
 
-    const handleFormSubmit = (values: any) => {
+    const isNonMobile = useMediaQuery("(min-width:600px)")
+
+    const [loader, setLoader] = useState(false)
+    const [regionId, setRegionId] = useState('')
+    const [regions, setRegions] = useState([])
+
+    const getPlantType = useCallback(() => {
+        api.getData("region").then((data) => setRegions(data.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        getPlantType()
+    }, [getPlantType])
+
+    const handleSelector = (e: any) => setRegionId(e.target.value)
+
+    const handleFormSubmit = (values: ChangeEvent<HTMLInputElement> | any) => {
         setLoader(true)
-
         const payload = {
             name_uz: values.name_uz,
             name_ru: values.name_ru,
             name_en: values.name_en,
+            regionId: regionId
         }
 
-        api.authPost('region', payload).then((data) => {
+        api.authPost("district", payload).then(data => {
             if (data.success) {
-                toast.success("Region Created", {
+                toast.success("District created", {
                     theme: "dark"
                 })
-                navigate("/admin/regions")
+                navigate("/admin/districts")
                 setLoader(false)
-            } else {
+            }
+            else {
                 toast.error(data.message, {
                     theme: "dark"
                 })
                 setLoader(false)
             }
-        }).catch((err: any) => {
-            toast.error(err.message, {
-                theme: "dark"
-            })
-            setLoader(false)
-        })
+        }).catch(() => setLoader(false))
     }
 
     return (
@@ -72,7 +92,7 @@ const RegionsAddComponent = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Region name uz"
+                                label="District name uz"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name_uz}
@@ -85,7 +105,7 @@ const RegionsAddComponent = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Region name ru"
+                                label="District name ru"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name_ru}
@@ -98,7 +118,7 @@ const RegionsAddComponent = () => {
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Region name en"
+                                label="District name en"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.name_en}
@@ -107,10 +127,29 @@ const RegionsAddComponent = () => {
                                 helperText={touched.name_en && errors.name_en}
                                 sx={{ gridColumn: "span 2" }}
                             />
+                            <FormControl fullWidth
+                                sx={{ gridColumn: "span 2" }}
+                            >
+                                <InputLabel id="demo-simple-select-label">Choose category</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={regionId}
+                                    label="Regions"
+                                    onChange={handleSelector}
+                                    name="regionId"
+                                >
+                                    {regions.map((item: regionType) => {
+                                        const name: string = item[`name_${l}` as keyof regionType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
+                                </Select>
+                            </FormControl>
+                            
                         </Box>
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <CButton color="primary" type="submit">
-                                Add Region
+                            <CButton color="primary" type="submit" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                Create new District
                                 {loader && <CSpinner color="light" style={{ width: '15px', height: "15px" }} />}
                             </CButton>
                         </Box>
@@ -131,5 +170,4 @@ const initialValues = {
     name_ru: "",
     name_en: "",
 }
-
-export default RegionsAddComponent
+export default DistrictAdd

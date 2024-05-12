@@ -1,32 +1,45 @@
-import { Box, TextField } from "@mui/material"
+import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import { CButton } from "@coreui/react"
 import { ChangeEvent, useCallback, useEffect, useState } from "react"
 import { api } from "@/api"
 import { toast } from "react-toastify"
 import Router from "@/hooks/router"
 import { Form, Field } from "react-final-form"
+import { Language } from "@/hooks/language"
 
-const RegionsEditComponent = () => {
+type districtType = {
+    id: number
+    name_uz: string,
+    name_ru: string,
+    name_en: string,
+    regionId: string,
+}
 
+const DistrictEditComponent = () => {
+
+    const { l } = Language("plants")
     const { navigate, paramId } = Router()
+    const [regions, setRegions] = useState([])
+    const [regionId, setRegionId] = useState(null)
 
     const [initialValues, setInitialValues] = useState(
         {
             name_uz: "",
             name_ru: "",
             name_en: "",
+            regionId: "",
         }
     );
 
     const getPlantType = useCallback(() => {
         if (paramId) {
-            api.getData(`region/${paramId}`).then((data) => {
-
+            api.getData(`district/${paramId}`).then((data) => {
                 setInitialValues(
                     {
                         name_uz: data.data.name_uz,
                         name_ru: data.data.name_ru,
-                        name_en: data.data.name_en
+                        name_en: data.data.name_en,
+                        regionId: data.data.regionId
                     }
                 )
             }).catch(err => console.log(err))
@@ -37,6 +50,15 @@ const RegionsEditComponent = () => {
         getPlantType()
     }, [getPlantType])
 
+    const getRegions = useCallback(() => {
+        api.getData('region').then((data) => setRegions(data.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        getRegions()
+    }, [getRegions])
+
 
     const handleFormSubmit = (values: ChangeEvent<HTMLInputElement> | any) => {
 
@@ -44,14 +66,15 @@ const RegionsEditComponent = () => {
             name_uz: values.name_uz,
             name_ru: values.name_ru,
             name_en: values.name_en,
+            regionId: regionId
         }
 
-        api.authPut(`region/${paramId}`, payload).then(data => {
+        api.authPut(`district/${paramId}`, payload).then(data => {
             if (data.success) {
-                toast.success("Region Updated", {
+                toast.success("District Updated", {
                     theme: "dark"
                 })
-                navigate("/admin/regions")
+                navigate("/admin/districts")
             }
             else {
                 toast.error(data.message, {
@@ -61,6 +84,7 @@ const RegionsEditComponent = () => {
         }).catch(err => console.log(err))
     }
 
+    const handleSelector = (e: any) => setRegionId(e.target.value)
     return (
         <Box m="20px">
             <Form
@@ -110,7 +134,26 @@ const RegionsEditComponent = () => {
                                     />
                                 )}
                             </Field>
-                        </div> 
+                            <FormControl
+                                fullWidth
+                                sx={{ gridColumn: "span 2" }}
+                            >
+                                <InputLabel id="demo-simple-select-label">Plant Categories</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={regionId}
+                                    label="Regions"
+                                    onChange={handleSelector}
+                                    name="regionId"
+                                >
+                                    {regions.map((item: districtType) => {
+                                        const name: string = item[`name_${l}` as keyof districtType] as string
+                                        return <MenuItem value={item.id} key={item.id}>{name}</MenuItem>
+                                    })}
+                                </Select>
+                            </FormControl>
+                        </div>
                         <div className="box">
                             <CButton color="primary" type="submit">Edit Region</CButton>
                         </div>
@@ -121,4 +164,4 @@ const RegionsEditComponent = () => {
     )
 }
 
-export default RegionsEditComponent
+export default DistrictEditComponent

@@ -1,35 +1,34 @@
 import { api } from "@/api"
+import Router from "@/hooks/router"
 import { useState, useCallback, useEffect } from "react"
 import ComponentHeader from "../ComponentHeader"
 import { StyledProducts } from "../Products/style.products"
 import TableComponent from "../Table"
-import Router from "@/hooks/router"
 import { regionsColumn } from "./data"
 
-const RegionsComponent = () => {
-
+const Districts = () => {
     const { navigate } = Router()
     const [data, setData] = useState([])
 
     const getPlantType = useCallback(() => {
-        api.getData("region").then((data) => setData(data.data))
+        api.getData("district").then((data) => setData(data.data))
             .catch((err) => console.log(err))
     }, [])
 
     useEffect(() => {
         getPlantType()
-    }, [getPlantType]) 
+    }, [getPlantType])
 
 
     const navigateTo = (id: number) => {
-        navigate(`/admin/regions/edit/${id}`)
+        navigate(`/admin/districts/edit/${id}`)
     }
-    
+
     return (
         <StyledProducts>
-            <ComponentHeader title="Add Product" onClick={() => navigate && navigate("/admin/regions/add")} />
+            <ComponentHeader title="Add Product" onClick={() => navigate && navigate("/admin/districts/add")} />
             <TableComponent user={data} navigateTo={navigateTo} column={regionsColumn} />
         </StyledProducts>
     )
 }
-export default RegionsComponent
+export default Districts

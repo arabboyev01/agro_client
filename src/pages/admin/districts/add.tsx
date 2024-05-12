@@ -1,9 +1,10 @@
-import AdminLayout from "@/Admin/components/Layout";
+import DistrictAdd from "@/Admin/components/District/add"
+import AdminLayout from "@/Admin/components/Layout"
 
 export default function Dashboard() {
     return (
         <AdminLayout>
-            <h1>Districts add</h1>
+            <DistrictAdd />
         </AdminLayout>
     )
 }

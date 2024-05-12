@@ -57,7 +57,7 @@ export const LeftItemsText = styled.p`
   font-size: 15px;
   font-weight: 700;
   color: #828282;
-  max-width: 138px;
+  max-width: 168px;
   text-align: center;
 
   @media (max-width: 1000px) {
