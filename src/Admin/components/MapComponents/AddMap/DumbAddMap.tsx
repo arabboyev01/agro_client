@@ -147,8 +147,9 @@ const AddMap = () => {
                 height={47}
                 MapContent={PointComponent}
                 mapCenter={mapCenter}
-                setMapCenter={setMapCenter}
-            />
+                setMapCenter={setMapCenter} mapData={[]} onClick={function (id: number): void {
+                    throw new Error("Function not implemented.")
+                } } />
             <Box m="20px">
                 <form onSubmit={formik.handleSubmit}>
                     <Box

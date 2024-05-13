@@ -6,7 +6,7 @@ type MyContentComponent = React.ComponentType<MyContentProps|any>
 
 type ConponentProps = {
     height: number
-    MapContent: MyContentComponent
+    MapContent: MyContentComponent|any
     mapCenter: { lat: number, lng: number }
     setMapCenter: (value: { lat: number, lng: number }) => void
     mapData: LocationType[]
@@ -38,7 +38,7 @@ const MapUI = ({ height, MapContent, mapCenter, setMapCenter, mapData, onClick }
                 onZoomAnimationStart={(maps) => handleZoomChange(maps)}
                 onZoomAnimationEnd={(maps) => handleZoomChange(maps)}
             >
-                {mapData ? (
+                {mapData && mapData.length ? (
                     mapData.map((item: LocationType) => (
                         <MapContent
                             lat={Number(item.lat)}
