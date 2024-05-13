@@ -46,5 +46,11 @@
   "plants": {},
   "notification": {
     "order": "Your order has sent !"
+  },
+  "login": {
+    "title": "Welcome back!",
+    "text": "Please enter your details",
+    "remember": "Remember for 30 days",
+    "login": "Login"
   }
 }

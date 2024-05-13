@@ -46,5 +46,11 @@
   "plants": {},
   "notification": {
     "order": "Buyurtmangiz qabul qilindi !"
+  },
+  "login": {
+    "title": "Xush kelibsiz!",
+    "text": "Iltimos shaxsiy ma'lumotingizni kiriting",
+    "remember": "30 kunga eslab qolish",
+    "login": "Kirish"
   }
 }

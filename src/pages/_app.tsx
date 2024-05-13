@@ -7,6 +7,7 @@ import { withProvider } from '@/Providers'
 import '../main.css'
 import 'react-toastify/dist/ReactToastify.css'
 import '../core-ui.css'
+import '../login.css'
 
 import AOS from 'aos'
 import 'aos/dist/aos.css'
