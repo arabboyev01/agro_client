@@ -1,3 +1,6 @@
+import { FieldInputProps } from "formik"
+import { FieldMetaState } from "react-final-form"
+
 export interface TableProps<T> {
     column: TableColumn
     data: T
@@ -87,4 +90,9 @@ export interface MyContentProps {
     lng?: number;
     isSelected: boolean;
     searchValue?: string
+}
+
+export type fieldType = { 
+    field: FieldInputProps<any>
+    meta: FieldMetaState<any> 
 }
