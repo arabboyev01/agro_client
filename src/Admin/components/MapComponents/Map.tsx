@@ -1,17 +1,19 @@
 import GoogleMapReact from 'google-map-react'
 import { useState } from 'react'
-import { MyContentProps } from '@/Admin/types';
+import { LocationType, MyContentProps } from '@/Admin/types';
 
-type MyContentComponent = React.ComponentType<MyContentProps>
+type MyContentComponent = React.ComponentType<MyContentProps|any>
 
 type ConponentProps = {
     height: number
     MapContent: MyContentComponent
     mapCenter: { lat: number, lng: number }
-    setMapCenter: (value: { lat: number, lng: number}) => void
+    setMapCenter: (value: { lat: number, lng: number }) => void
+    mapData: LocationType[]
+    onClick: (id: number) => void
 }
 
-const MapUI = ({ height, MapContent, mapCenter, setMapCenter }: ConponentProps) => {
+const MapUI = ({ height, MapContent, mapCenter, setMapCenter, mapData, onClick }: ConponentProps) => {
 
     const [selectedArea, setSelectedArea] = useState<{ lat: number, lng: number } | null>(null);
     const [isActive, setIsActive] = useState(false)
@@ -36,12 +38,26 @@ const MapUI = ({ height, MapContent, mapCenter, setMapCenter }: ConponentProps) 
                 onZoomAnimationStart={(maps) => handleZoomChange(maps)}
                 onZoomAnimationEnd={(maps) => handleZoomChange(maps)}
             >
-                <MapContent
-                    lat={selectedArea?.lat}
-                    lng={selectedArea?.lng}
-                    isSelected={isActive}
-                />
+                {mapData ? (
+                    mapData.map((item: LocationType) => (
+                        <MapContent
+                            lat={Number(item.lat)}
+                            lng={Number(item.long)}
+                            isSelected={true}
+                            key={item.id}
+                            onClick={onClick}
+                            id={item.id}
+                        />
+                    ))
+                ) : (
+                    <MapContent
+                        lat={selectedArea?.lat}
+                        lng={selectedArea?.lng}
+                        isSelected={isActive}
+                    />
+                )}
             </GoogleMapReact>
+
         </div>
     )
 }

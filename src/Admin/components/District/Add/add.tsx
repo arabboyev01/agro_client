@@ -102,7 +102,7 @@ const DistrictAdd = () => {
                 <FormControl fullWidth
                     sx={{ gridColumn: "span 2" }}
                 >
-                    <InputLabel id="demo-simple-select-label">Choose category</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Choose region</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"

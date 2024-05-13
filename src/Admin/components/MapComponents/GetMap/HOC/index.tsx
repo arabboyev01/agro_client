@@ -1,19 +1,11 @@
-import { FC, useCallback, useEffect } from "react";
+import { FC } from "react";
 import LocationSVG from '@/assets/location.png'
-import { api } from "@/api";
-
-const MyHOCComponent: FC = () => {
-
-    const fetchMapInformation = useCallback(() => {
-        api.authGet('map').then((data) => console.log(data))
-            .catch(err => console.log(err))
-    }, [])
-
-    useEffect(() => {
-        fetchMapInformation()
-    }, [fetchMapInformation])
-    
-   return <div>
+ type props = {
+     onClick: (id: number) => void
+     id: number
+ }
+const MyHOCComponent: FC<props> = ({ onClick, id }) => { 
+    return <div style={{ cursor: "pointer" }} onClick={() => onClick(id)}>
         <img src={LocationSVG.src} alt="Selected Icon" style={{ width: '30px', height: '30px' }} />
     </div>
 }

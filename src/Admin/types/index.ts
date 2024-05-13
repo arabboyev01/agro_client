@@ -90,9 +90,44 @@ export interface MyContentProps {
     lng?: number;
     isSelected: boolean;
     searchValue?: string
+    onClick?: (id: number) => void
+    id?: number
 }
 
 export type fieldType = { 
     field: FieldInputProps<any>
     meta: FieldMetaState<any> 
+}
+
+interface SoilContent {
+    id: number;
+    key: string;
+    value: string;
+}
+
+export interface District {
+    id: number;
+    name_en: string;
+    name_ru: string;
+    name_uz: string;
+}
+
+export interface Region {
+    id: number;
+    name_en: string;
+    name_ru: string;
+    name_uz: string;
+}
+
+export interface LocationType {
+    address: string;
+    crops: number[];
+    district: District;
+    districtId: number;
+    id: number;
+    lat: string;
+    long: string;
+    region: Region;
+    regionId: number;
+    soilsContent: SoilContent[];
 }
