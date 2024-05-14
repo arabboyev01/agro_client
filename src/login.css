@@ -29,7 +29,7 @@
 }
 
 .login-left {
-  flex: 0.5;
+  flex: 0.4;
   height: 100vh;
   background-image: url(./assets/agro.jpg);
   background-position: center center;
@@ -56,7 +56,7 @@
 
 .login-right {
   height: 100vh;
-  flex: 0.5;
+  flex: 0.6;
 
   @media(max-width: 900px) {
     flex: 1;
