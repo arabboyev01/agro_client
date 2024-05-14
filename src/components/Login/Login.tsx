@@ -12,13 +12,24 @@ import { useRouter } from "next/router";
 const Login = () => {
 
     const router = useRouter()
-    
+
     const [showPassword, setShowPassword] = useState(false)
     const { lang } = Language("login")
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const onSubmit = () => {
+
+        if (!email.trim()) {
+            toast.error(lang("email"), { theme: "dark" });
+            return
+        }
+
+        if (!password.trim()) {
+            toast.error(lang("password"), { theme: "dark" })
+            return
+        }
+
         const payload: LoginValueType = {
             email,
             password
@@ -39,8 +50,8 @@ const Login = () => {
     return (
         <div className="login-main">
             <div className="login-left">
-                <div className="logo">
-                    <img src={SpaceAgro.src} alt="Space Agro" className="logo_image"/>
+                <div className="logo" onClick={() => router.push('/')}>
+                    <img src={SpaceAgro.src} alt="Space Agro" className="logo_image" />
                 </div>
             </div>
             <div className="login-right">
@@ -49,10 +60,17 @@ const Login = () => {
                         <h2>{lang("title")}</h2>
                         <p>{lang("text")}</p>
                         <form>
-                            <input type="email" placeholder="Email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}/>
+                            <input type="email" placeholder="Email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
                             <div className="pass-input-div">
-                                <input type={showPassword ? "text" : "password"} placeholder="Password" onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
-                                {showPassword ? <FaEyeSlash onClick={() => { setShowPassword(!showPassword) }} /> : <FaEye onClick={() => { setShowPassword(!showPassword) }} />}
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password" onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} 
+                                />
+
+                                {showPassword ?
+                                    <FaEyeSlash onClick={() => { setShowPassword(!showPassword) }} /> :
+                                    <FaEye onClick={() => { setShowPassword(!showPassword) }} />
+                                }
 
                             </div>
 

@@ -51,6 +51,8 @@
     "title": "Welcome back!",
     "text": "Please enter your details",
     "remember": "Remember for 30 days",
-    "login": "Login"
+    "login": "Login",
+    "email": "Please enter your email!",
+    "password": "Please enter your password!"
   }
 }

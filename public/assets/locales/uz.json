@@ -51,6 +51,8 @@
     "title": "Xush kelibsiz!",
     "text": "Iltimos shaxsiy ma'lumotingizni kiriting",
     "remember": "30 kunga eslab qolish",
-    "login": "Kirish"
+    "login": "Kirish",
+    "email": "Iltimos, elektron pochta manzilingizni kiriting!",
+    "password": "Iltimos, parolingizni kiriting!"
   }
 }

@@ -1,35 +1,34 @@
-@media(max-width: 900px){
-    .login-left{
-        display: none;
-    }   
+@media (max-width: 900px) {
+  .login-left {
+    display: none;
+  }
 }
 
-@media(max-width: 370px){
-    .login-center-options{
-        flex-direction: column;
-        align-items: center;
-        row-gap: 10px;
-    }
+@media (max-width: 370px) {
+  .login-center-options {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+  }
 
-    .login-center-buttons{
-        margin-top: 20px;
-    }
+  .login-center-buttons {
+    margin-top: 20px;
+  }
 
-    .login-center h2{
-        font-size: 3rem;
-    }
+  .login-center h2 {
+    font-size: 3rem;
+  }
 
-    .login-center p{
-        font-size: 1.5rem;
-    }
-
+  .login-center p {
+    font-size: 1.5rem;
+  }
 }
 
-.login-main{
+.login-main {
   display: flex;
 }
 
-.login-left{
+.login-left {
   flex: 0.5;
   height: 100vh;
   background-image: url(./assets/agro.jpg);
@@ -37,11 +36,17 @@
   background-size: cover;
   display: flex;
   padding: 24px 48px;
+
+  @media(max-width: 900px) {
+    display: none;
+    flex: 1;
+  }
 }
 .login-left .logo {
   width: 100px;
   height: 100px;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .login-left .logo .logo_image {
@@ -49,12 +54,16 @@
   height: 100px;
 }
 
-.login-right{
+.login-right {
   height: 100vh;
   flex: 0.5;
+
+  @media(max-width: 900px) {
+    flex: 1;
+  }
 }
 
-.login-right-container{
+.login-right-container {
   height: 100%;
   width: 80%;
   margin: 0 auto;
@@ -62,47 +71,45 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 }
 
-.login-right form{
+.login-right form {
   display: flex;
   flex-direction: column;
 }
 
-.login-logo{
+.login-logo {
   align-self: center;
   padding-top: 50px;
 }
 
-.login-center{
+.login-center {
   margin: auto 0;
 }
 
-.login-logo img{
+.login-logo img {
   width: 50px;
 }
 
-.login-center h2{
+.login-center h2 {
   font-size: 2.5rem;
   font-family: "Poppins", sans-serif;
 }
 
-.login-center{
+.login-center {
   text-align: center;
 }
 
-.login-center p{
+.login-center p {
   font-weight: 400;
   font-size: 1rem;
   margin-bottom: 40px;
   font-family: "Poppins", sans-serif;
 }
 
-form input[type='email'],
-form input[type='password'],
-form input[type='text']
- {
+form input[type="email"],
+form input[type="password"],
+form input[type="text"] {
   width: 100%;
   padding: 16px;
   margin-bottom: 16px;
@@ -114,11 +121,11 @@ form input[type='text']
   font-size: 17px;
 }
 
-.pass-input-div{
+.pass-input-div {
   position: relative;
 }
 
-.pass-input-div svg{
+.pass-input-div svg {
   font-size: 20px;
   position: absolute;
   right: 10px;
@@ -127,7 +134,7 @@ form input[type='text']
   outline: none;
 }
 
-form button[type='button'] {
+form button[type="button"] {
   width: 100%;
   padding: 16px;
   border: none;
@@ -138,20 +145,19 @@ form button[type='button'] {
   font-weight: 600;
 }
 
-
-.login-center-options{
+.login-center-options {
   display: flex;
   justify-content: space-between;
 }
 
-.remember-div{
-  display:flex;
+.remember-div {
+  display: flex;
   align-items: center;
   column-gap: 5px;
   flex-direction: row;
 }
 
-.remember-div label{
+.remember-div label {
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -160,61 +166,60 @@ form button[type='button'] {
   margin-left: 5px;
 }
 
-.forgot-pass-link{
+.forgot-pass-link {
   text-decoration: none;
   font-size: 1.3rem;
 }
 
-.forgot-pass-link:hover{
+.forgot-pass-link:hover {
   text-decoration: underline;
 }
 
-.login-center-buttons{
+.login-center-buttons {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
 
-.login-center-buttons button:nth-child(1){
+.login-center-buttons button:nth-child(1) {
   background-color: black;
   color: white;
   border: 3px solid black;
 }
 
-.login-center-buttons button:nth-child(1):hover{
+.login-center-buttons button:nth-child(1):hover {
   color: #333;
   background-color: white;
 }
 
-.login-center-buttons button:nth-child(2){
-  background-color: #F0F0F0;
+.login-center-buttons button:nth-child(2) {
+  background-color: #f0f0f0;
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 10px;
 }
 
-.login-center-buttons button:nth-child(2) img{
+.login-center-buttons button:nth-child(2) img {
   width: 30px;
 }
 
-.login-center-buttons button:nth-child(2):hover{
+.login-center-buttons button:nth-child(2):hover {
   background-color: #c4c4c457;
 }
 
-.login-bottom-p{
+.login-bottom-p {
   text-align: center;
   font-size: 1.5rem;
   padding-bottom: 40px;
 }
 
-.login-bottom-p a{
+.login-bottom-p a {
   text-decoration: none;
   font-weight: 600;
 }
 
-.login-bottom-p a:hover{
+.login-bottom-p a:hover {
   text-decoration: underline;
 }
-
