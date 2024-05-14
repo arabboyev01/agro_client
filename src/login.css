@@ -36,10 +36,18 @@
   background-position: center center;
   background-size: cover;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 24px 48px;
+}
+.login-left .logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
 }
 
+.login-left .logo .logo_image {
+  width: 100px;
+  height: 100px;
+}
 
 .login-right{
   height: 100vh;

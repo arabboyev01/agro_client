@@ -105,14 +105,14 @@ interface SoilContent {
     value: string;
 }
 
-export interface District {
+export interface DistrictType {
     id: number;
     name_en: string;
     name_ru: string;
     name_uz: string;
 }
 
-export interface Region {
+export interface RegionType {
     id: number;
     name_en: string;
     name_ru: string;
@@ -122,12 +122,12 @@ export interface Region {
 export interface LocationType {
     address: string;
     crops: number[];
-    district: District;
+    district: DistrictType;
     districtId: number;
     id: number;
     lat: string;
     long: string;
-    region: Region;
+    region: RegionType;
     regionId: number;
     soilsContent: SoilContent[];
 }

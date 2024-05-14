@@ -57,7 +57,6 @@ const MapUI = ({ height, MapContent, mapCenter, setMapCenter, mapData, onClick }
                     />
                 )}
             </GoogleMapReact>
-
         </div>
     )
 }

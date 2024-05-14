@@ -2,13 +2,17 @@ import Router from "@/hooks/router"
 import DumbGetMap from "./DumbAddMap"
 import { useCallback, useEffect, useState } from "react"
 import { api } from "@/api"
+import { Language } from "@/hooks/language"
 
 const GetMap = () => {
 
     const { navigate } = Router()
+    const { l } = Language("")
 
     const [mapCenter, setMapCenter] = useState<{ lat: number, lng: number }>({ lat: 40.7686, lng: 72.2364 })
     const [mapData, setMapData] = useState([])
+    const [visible, setVisible] = useState(false)
+    const [singleData, setSingleData] = useState({})
 
     const navigateTo = (id: number) => {
         navigate(`/admin/map/edit/${id}`)
@@ -22,10 +26,10 @@ const GetMap = () => {
     useEffect(() => {
         fetchMapInformation()
     }, [fetchMapInformation])
-    console.log(mapData)
 
     const getSingleMapData = (id: number) => {
-        api.authGet(`map/${id}`).then((data) => console.log(data.data))
+        setVisible(true)
+        api.authGet(`map/${id}`).then((data) => setSingleData(data.data))
             .catch(err => console.log(err))
     }
 
@@ -36,6 +40,10 @@ const GetMap = () => {
         setMapCenter={setMapCenter}
         mapData={mapData}
         getSingleMapData={getSingleMapData}
+        visible={visible}
+        setVisible={setVisible}
+        singleData={singleData}
+        l={l}
     />
 }
 export default GetMap
