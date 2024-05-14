@@ -60,11 +60,12 @@ const Login = () => {
                         <h2>{lang("title")}</h2>
                         <p>{lang("text")}</p>
                         <form>
-                            <input type="email" placeholder="Email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
+                            <input type="email" placeholder="Email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} className="login_email"/>
                             <div className="pass-input-div">
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     placeholder="Password" onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} 
+                                    className="login_password"
                                 />
 
                                 {showPassword ?

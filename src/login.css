@@ -107,9 +107,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-form input[type="email"],
-form input[type="password"],
-form input[type="text"] {
+.login_email, .login_password {
   width: 100%;
   padding: 16px;
   margin-bottom: 16px;
