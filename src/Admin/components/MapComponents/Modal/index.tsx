@@ -46,7 +46,7 @@ const MapModal: FC<ModalProps> = ({ visible, handleCloseModal, data, l }) => {
                         <strong>Tuproq haqida ma&apos;lumot: </strong> <br />
                         <S.ListItem>
                             {data && data?.soilsContent && JSON.parse(data?.soilsContent as any)?.map((item: { key: string, value: string }) => (
-                                <li key={item.key}>{item.key}: {item.value}</li>
+                                <li key={item.key} style={{ textTransform: "capitalize"}}>{item.key}: {item.value}%</li>
                             ))}
                         </S.ListItem>
                     </S.AddressName>
