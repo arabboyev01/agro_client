@@ -121,7 +121,7 @@ export interface RegionType {
 
 export interface LocationType {
     address: string;
-    crops: number[];
+    crops: number[] | PlantType[] | any;
     district: DistrictType;
     districtId: number;
     id: number;

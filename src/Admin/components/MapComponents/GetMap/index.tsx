@@ -33,6 +33,12 @@ const GetMap = () => {
             .catch(err => console.log(err))
     }
 
+    const handleCloseModal = () => {
+        setVisible(false)
+        setSingleData({})
+    }
+    console.log(singleData)
+
     return <DumbGetMap
         navigateTo={navigateTo}
         navigate={navigate}
@@ -41,9 +47,9 @@ const GetMap = () => {
         mapData={mapData}
         getSingleMapData={getSingleMapData}
         visible={visible}
-        setVisible={setVisible}
         singleData={singleData}
         l={l}
+        handleCloseModal={handleCloseModal}
     />
 }
 export default GetMap
