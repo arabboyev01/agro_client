@@ -51,9 +51,8 @@ const Login = () => {
             }
 
             if(data.role === "USER"){
-                router.push('/user')
+                router.push('/user-map')
             }
-
         })
     }
 
