@@ -19,6 +19,15 @@ type ProductType = {
     name_en: string
 }
 
+type userType = {
+    fullName: string,
+    id: number,
+    email: string
+    role: string
+    createdAt: string
+    updatedAt: string
+}
+
 const AddMap = () => {
 
     const { l } = Language("home")
@@ -36,6 +45,8 @@ const AddMap = () => {
     const [soil_key, setKey_data] = useState("")
     const [soil_value, setKey_value] = useState("")
     const [soils, setSoils] = useState<{ key: string; value: string }[]>([])
+    const [users, setUSers] = useState([])
+    const [userId, setUSerID] = useState<null|string>(null)
 
     const handleSoilValue = () => {
         if (soil_key && soil_value) {
@@ -55,6 +66,11 @@ const AddMap = () => {
     const fetchData = useCallback(() => {
         fetch(`${MAIN_URL}/plants-category`).then(res => res.json())
             .then((data) => setData(data.data))
+    }, [])
+
+    const fetchUser = useCallback(() => {
+        api.authGet("user-role").then((data) => setUSers(data.user))
+           .catch(err => console.log(err))
     }, [])
 
     const fetchType = useCallback(() => {
@@ -93,6 +109,10 @@ const AddMap = () => {
         fetchType()
     }, [fetchType])
 
+    useEffect(() => {
+        fetchUser()
+    }, [fetchUser])
+
     const formik: any = useFormik({
         initialValues: {
             address: "",
@@ -105,7 +125,8 @@ const AddMap = () => {
                 crops: JSON.stringify(selectedProducts),
                 soilsContent: JSON.stringify(soils),
                 lat: JSON.stringify(mapCenter.lat),
-                long: JSON.stringify(mapCenter.lng)
+                long: JSON.stringify(mapCenter.lng),
+                userId: userId
             }
 
             if (values.address && selectedProducts && soils && mapCenter.lat && mapCenter.lng, regionId, districtId) {
@@ -133,6 +154,7 @@ const AddMap = () => {
         },
     })
 
+    console.log(users)
     useEffect(() => {
         setKey_value(formik.values.soil_value)
     }, [formik.values.soil_value])
@@ -251,6 +273,24 @@ const AddMap = () => {
                                 })}
                             </Select>
                         </FormControl>
+
+                        <FormControl fullWidth
+                            sx={{ gridColumn: "span 4" }}
+                        >
+                            <InputLabel id="demo-simple-select-label">Choose a user</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={userId}
+                                label="Plant Categories"
+                                onChange={(e) => setUSerID(e.target.value)}
+                                name="categoryId"
+                            >
+                                {users?.map((item: userType) => 
+                                    <MenuItem value={item.id} key={item.id}>{item.email}</MenuItem>
+                                )}
+                            </Select>
+                        </FormControl>
                         <TextField
                             fullWidth
                             variant="filled"
@@ -267,7 +307,7 @@ const AddMap = () => {
                         <TextField
                             fullWidth
                             variant="filled"
-                            type="text"
+                            type="number"
                             label="Soil Value"
                             onBlur={formik.handleBlur}
                             onChange={formik.handleChange}

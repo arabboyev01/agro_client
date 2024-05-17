@@ -1,10 +1,10 @@
 import Router from "@/hooks/router"
 import DumbGetMap from "./DumbAddMap"
-import { useCallback, useEffect, useState } from "react"
+import { FC, useCallback, useEffect, useState } from "react"
 import { api } from "@/api"
 import { Language } from "@/hooks/language"
 
-const GetMap = () => {
+const GetMap: FC<{ addButton?: boolean }> = ({ addButton }) => {
 
     const { navigate } = Router()
     const { l } = Language("")
@@ -37,7 +37,6 @@ const GetMap = () => {
         setVisible(false)
         setSingleData({})
     }
-    console.log(singleData)
 
     return <DumbGetMap
         navigateTo={navigateTo}
@@ -50,6 +49,7 @@ const GetMap = () => {
         singleData={singleData}
         l={l}
         handleCloseModal={handleCloseModal}
+        addButton={addButton}
     />
 }
 export default GetMap

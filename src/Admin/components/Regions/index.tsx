@@ -27,7 +27,7 @@ const RegionsComponent = () => {
     
     return (
         <StyledProducts>
-            <ComponentHeader title="Add Product" onClick={() => navigate && navigate("/admin/regions/add")} />
+            <ComponentHeader title="Add Region" onClick={() => navigate && navigate("/admin/regions/add")} />
             <TableComponent user={data} navigateTo={navigateTo} column={regionsColumn} />
         </StyledProducts>
     )

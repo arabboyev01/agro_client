@@ -8,6 +8,7 @@ import { api } from "@/api";
 import { setToken } from "@/utils/tokens"
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Login = () => {
 
@@ -35,6 +36,7 @@ const Login = () => {
             password
         }
         api.postData('login', payload).then(data => {
+            console.log(data)
             if (!data.success) return toast.error(data.message, {
                 theme: "dark"
             })
@@ -43,7 +45,15 @@ const Login = () => {
             toast.success(data.message, {
                 theme: "dark"
             })
-            router.push('/admin')
+
+            if(data.role === "ADMIN"){
+                router.push('/admin')
+            }
+
+            if(data.role === "USER"){
+                router.push('/user')
+            }
+
         })
     }
 
@@ -51,7 +61,7 @@ const Login = () => {
         <div className="login-main">
             <div className="login-left">
                 <div className="logo" onClick={() => router.push('/')}>
-                    <img src={SpaceAgro.src} alt="Space Agro" className="logo_image" />
+                    <Image src={SpaceAgro.src} alt="Space Agro" className="logo_image" width={100} height={100}/>
                 </div>
             </div>
             <div className="login-right">
