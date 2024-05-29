@@ -8,7 +8,7 @@ const useAuth = () => {
         const token = localStorage.getItem('accessToken')
 
         if (!token) {
-            navigate('/admin/login')
+            navigate('/login')
         }
     }, [navigate])
 

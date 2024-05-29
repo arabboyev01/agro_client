@@ -51,3 +51,9 @@ body {
   font-size: 24px;
   font-weight: 600;
 }
+
+.sidebar_logo {
+  padding-left: 10px;
+  width: 100%;
+  cursor: pointer;
+}
