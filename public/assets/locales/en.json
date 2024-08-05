@@ -54,5 +54,16 @@
     "login": "Login",
     "email": "Please enter your email!",
     "password": "Please enter your password!"
+  },
+  "dashboard": {
+    "statistics": "My Statistics",
+    "products": "Products",
+    "orders": "Orders",
+    "soils": "Soils",
+    "sales": "Sales",
+    "map": "Map"
+  },
+  "products": {
+    "add": "Add Products"
   }
 }

@@ -5,7 +5,7 @@ import { Language } from "@/hooks/language"
 
 const Navbar = () => {
 
-    const { lastPathname } = Router()
+    const { lastPathname, navigate } = Router()
     const {l } = Language("")
     const [lang, setLang] = useState('uz')
 
@@ -13,6 +13,6 @@ const Navbar = () => {
         setLang(l)
     }, [l])
 
-    return <DumbNavbar lastPathname={lastPathname} lang={lang} setLang={setLang}/>
+    return <DumbNavbar lastPathname={lastPathname} lang={lang} setLang={setLang} navigate={navigate}/>
 }
 export default Navbar

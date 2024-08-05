@@ -54,5 +54,16 @@
     "login": "Kirish",
     "email": "Iltimos, elektron pochta manzilingizni kiriting!",
     "password": "Iltimos, parolingizni kiriting!"
+  },
+  "dashboard": {
+    "statistics": "Mening Statistikam",
+    "products": "Mahsulotlar",
+    "orders": "Buyurtmalar",
+    "soils": "Tuproqlar",
+    "sales": "Savdo",
+    "map": "Xarita"
+  },
+  "products": {
+    "add": "Mahsulot Qo'shish"
   }
 }

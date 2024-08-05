@@ -12,7 +12,7 @@ const AdminLayout: FC<{ children: ReactNode }> = ({ children }) => {
     api.authGet('user').then(data => {
       if (data?.success && data.user.role === "ADMIN") {
         setIsAdmin(true)
-      } else if(data?.success && data.user.role === "USER") {
+      } else if (data?.success && data.user.role === "USER") {
         setIsAdmin(false)
       }
     }).catch(err => console.log(err))
@@ -26,7 +26,8 @@ const AdminLayout: FC<{ children: ReactNode }> = ({ children }) => {
     <div className="c-app" style={{ position: "fixed", width: "100%", height: "100vh" }}>
       {!isAdmin && <div className="container">
         <h1 className="text_title">You do not have permission</h1>
-      </div>}
+      </div>
+      }
       <div className="c-wrapper">
         <div className="c-sidebar" id="sidebar">
           <SIdebarComponent />
