@@ -86,15 +86,15 @@ const PlantEdit = () => {
     const handleFormSubmit = (values: ChangeEvent<HTMLInputElement> | any) => {
 
         const formData = new FormData()
-        formData.append("name", values.name)
+        formData.append("name_uz", values.name_uz)
+        formData.append("name_ru", values.name_ru)
+        formData.append("name_en", values.name_en)
+        formData.append("describtion_uz", values.descibtion_uz)
+        formData.append("describtion_ru", values.descibtion_ru)
+        formData.append("describtion_en", values.descibtion_en)
         formData.append("image", image)
         formData.append("plantsCategoryId", categoryId)
         formData.append("plantTypeId", typeId)
-        formData.append("waterPeriod", values.waterPeriod)
-        formData.append("yieldDuration", values.yieldDuration)
-        formData.append("temperature", values.temperature)
-        formData.append("lightRequirement", values.lightRequirement)
-        formData.append("cultivationMethod", values.cultivationMethod)
 
         api.putData(`plant/${paramId}`, formData).then(data => {
             if (data.success) {
@@ -162,7 +162,7 @@ const PlantEdit = () => {
                             </Field>
                         </div>
                         <div className="box">
-                            <Field name="describtion_uz">
+                            <Field name="descibtion_uz">
                                 {({ input, meta }) => (
                                     <TextField
                                         {...input}
@@ -177,7 +177,7 @@ const PlantEdit = () => {
                                     />
                                 )}
                             </Field>
-                            <Field name="describtion_ru">
+                            <Field name="descibtion_ru">
                                 {({ input, meta }) => (
                                     <TextField
                                         {...input}
@@ -194,7 +194,7 @@ const PlantEdit = () => {
                             </Field>
                         </div>
                         <div className="box">
-                        <Field name="describtion_en">
+                            <Field name="descibtion_en">
                                 {({ input, meta }) => (
                                     <TextField
                                         {...input}
