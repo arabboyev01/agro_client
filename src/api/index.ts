@@ -30,12 +30,15 @@ class ApiService {
 
         try {
             const response: any = await fetch(mainUrl, {
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Authorization": `${typeof window !== "undefined" && window.localStorage.getItem("accessToken")}`
-                },
-                body: JSON.stringify(data),
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${
+                  typeof window !== "undefined" &&
+                  window.localStorage.getItem("accessToken")
+                }`,
+              },
+              body: JSON.stringify(data),
             });
 
             const res = await response.json()
@@ -51,13 +54,16 @@ class ApiService {
 
         try {
             const response: any = await fetch(mainUrl, {
-                method: "PUT",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Authorization": `${typeof window !== "undefined" && window.localStorage.getItem("accessToken")}`
-                },
-                body: JSON.stringify(data),
-            })
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${
+                  typeof window !== "undefined" &&
+                  window.localStorage.getItem("accessToken")
+                }`,
+              },
+              body: JSON.stringify(data),
+            });
 
             const res = await response.json()
 
@@ -75,7 +81,7 @@ class ApiService {
                 method: "GET",
                 headers: { 
                     "Content-Type": "application/json",
-                    "Authorization": `${typeof window !== "undefined" && window.localStorage.getItem("accessToken")}`
+                    "Authorization": `Bearer ${typeof window !== "undefined" && window.localStorage.getItem("accessToken")}`
                 },
             })
 
@@ -105,12 +111,15 @@ class ApiService {
 
         try {
             const response: any = await fetch(mainUrl, {
-                method: "POST",
-                headers: { 
-                    "Authorization": `${typeof window !== "undefined" && window.localStorage.getItem("accessToken")}`
-                },
-                body: data,
-            })
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${
+                  typeof window !== "undefined" &&
+                  window.localStorage.getItem("accessToken")
+                }`,
+              },
+              body: data,
+            });
 
             const res = await response.json()
 
@@ -125,12 +134,15 @@ class ApiService {
 
         try {
             const response: any = await fetch(mainUrl, {
-                method: "PUT",
-                headers: { 
-                    "Authorization": `${typeof window !== "undefined" && window.localStorage.getItem("accessToken")}`
-                },
-                body: data,
-            })
+              method: "PUT",
+              headers: {
+                Authorization: `Bearer ${
+                  typeof window !== "undefined" &&
+                  window.localStorage.getItem("accessToken")
+                }`,
+              },
+              body: data,
+            });
 
             const res = await response.json()
 
