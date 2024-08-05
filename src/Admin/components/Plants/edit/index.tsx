@@ -34,9 +34,9 @@ const PlantEdit = () => {
             name_uz: "",
             name_ru: "",
             name_en: "",
-            describtion_uz: "",
-            describtion_ru: "",
-            describtion_en: "",
+            descibtion_uz: "",
+            descibtion_ru: "",
+            descibtion_en: "",
         }
     );
 
@@ -61,15 +61,16 @@ const PlantEdit = () => {
     const getPlantType = useCallback(() => {
         if (paramId) {
             api.getData(`plant/${paramId}`).then((data) => {
+                console.log(data)
 
                 setInitialValues(
                     {
                         name_uz: data.data.name_uz,
                         name_ru: data.data.name_ru,
                         name_en: data.data.name_en,
-                        describtion_uz: data.data.describtion_uz,
-                        describtion_ru: data.data.describtion_ru,
-                        describtion_en: data.data.describtion_en
+                        descibtion_uz: data.data.describtion_uz,
+                        descibtion_ru: data.data.describtion_ru,
+                        descibtion_en: data.data.describtion_en
                     }
                 )
                 setCategory(data.data.plantsCategoryId)
